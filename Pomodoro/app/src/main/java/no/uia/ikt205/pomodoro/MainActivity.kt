@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var hasPauseTimerStarted: Boolean = false
 
     // Default timer value is 15 minutes
-    private var timeToCountDownInMs = 15000L // 15 * 60000L
+    private var timeToCountDownInMs = 15 * 60000L // Default 15 minutes
     private val timeTicks = 1000L
     private var pauseTime = 15 * 60000L // Default 15 minutes
 
