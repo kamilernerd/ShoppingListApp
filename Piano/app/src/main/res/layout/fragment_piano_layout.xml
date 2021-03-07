@@ -7,19 +7,23 @@
     tools:context=".PianoLayout">
 
     <LinearLayout
+        android:id="@+id/blackPianoKeysLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/fileNameInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
         android:id="@+id/whitePianoKeysLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="173dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <LinearLayout
-        android:id="@+id/blackPianoKeysLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal" />
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -48,7 +52,7 @@
             android:id="@+id/saveMusicSheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="152dp"
+            android:layout_marginStart="164dp"
             android:layout_marginTop="24dp"
             android:text="Save file"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,9 +73,9 @@
             android:layout_width="126dp"
             android:layout_height="31dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.012"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/startStopRecording"
             app:layout_constraintTop_toBottomOf="@+id/fileNameInput" />
 

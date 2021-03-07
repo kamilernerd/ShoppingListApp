@@ -1,5 +1,6 @@
 package com.kamil.piano
 
+import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.kamil.piano.databinding.FragmentPianoLayoutBinding
 import kotlinx.android.synthetic.main.fragment_piano_layout.*
 import kotlinx.android.synthetic.main.fragment_piano_layout.view.*
@@ -14,6 +16,8 @@ import java.io.File
 import java.io.FileOutputStream
 
 class PianoLayout : Fragment() {
+
+    var onSave: ((File: Uri) -> Unit)? = null
 
     private var _binding: FragmentPianoLayoutBinding? = null
     private val binding get() = _binding!!
@@ -96,46 +100,29 @@ class PianoLayout : Fragment() {
 
         view.saveMusicSheet.setOnClickListener {
             var fileName = view.fileNameInput.text.toString()
-            val filePath = this.activity?.getExternalFilesDir(null)
-            val newMusicFile = (File(filePath, fileName))
 
-            when {
-                pianoKeysList.count() == 0 -> Toast.makeText(
-                    activity,
-                    "Please enter some notes",
-                    Toast.LENGTH_SHORT
-                ).show()
-                fileName.isEmpty() -> Toast.makeText(
-                    activity,
-                    "Please enter a file name",
-                    Toast.LENGTH_SHORT
-                ).show()
-                filePath == null -> Toast.makeText(
-                    activity,
-                    "Path does not exist",
-                    Toast.LENGTH_SHORT
-                ).show()
-                newMusicFile.exists() -> Toast.makeText(
-                    activity,
-                    "File already exists",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                else -> {
-                    fileName = "$fileName.music"
-                    FileOutputStream(newMusicFile, true).bufferedWriter().use { writer ->
-                        pianoKeysList.forEach {
-                            writer.write("${it.toString()}\n")
-                        }
-                    }
-                    Toast.makeText(activity, "Your file has been saved!", Toast.LENGTH_SHORT).show()
-                    pianoKeysList.clear()
-                    fileNameInput.text.clear()
-                    FileOutputStream(newMusicFile).close()
-                }
+            if (pianoKeysList.count() > 0 && fileName.isNotEmpty()) {
+                fileName = "$fileName.music"
+                val content: String = pianoKeysList.map {
+                    it.toString()
+                }.reduce { acc, s -> acc + s + "\n" }
+                saveFile(fileName, content)
             }
         }
         return view
+    }
+
+    private fun saveFile(fileName: String, content: String) {
+        val path = this.activity?.getExternalFilesDir(null)
+
+        if (path != null) {
+            val file = File(path, fileName)
+            FileOutputStream(file, true).bufferedWriter().use { writer ->
+                writer.write(content)
+            }
+
+            this.onSave?.invoke(file.toUri())
+        }
     }
 
     private fun startRecordingTimer(){
