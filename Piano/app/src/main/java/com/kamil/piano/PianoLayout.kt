@@ -1,12 +1,17 @@
 package com.kamil.piano
 
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kamil.piano.databinding.FragmentPianoLayoutBinding
+import kotlinx.android.synthetic.main.fragment_piano_layout.*
 import kotlinx.android.synthetic.main.fragment_piano_layout.view.*
+import java.io.File
+import java.io.FileOutputStream
 
 class PianoLayout : Fragment() {
 
@@ -15,6 +20,10 @@ class PianoLayout : Fragment() {
 
     private val naturalTones = listOf("C", "D", "E", "F", "G", "A", "B", "C2", "D2", "E2", "F2", "G2", "A2", "B2")
     private val semiTones = listOf("C#", "D#", "F#", "G#", "A#", "C#2", "D#2", "F#2", "G#2", "A#2")
+
+    private var pianoKeysList: MutableList<PianoSheet> = mutableListOf<PianoSheet>()
+
+    private var isRecording: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +42,18 @@ class PianoLayout : Fragment() {
         naturalTones.forEach {
             val naturalTonePianoKey = WhitePianoKeysFragment.newInstance(it)
 
+            var noteStartTime: Long = 0
+
             naturalTonePianoKey.onKeyPressed = {
+                noteStartTime = SystemClock.elapsedRealtime() - recordingTimeChronometer.base
                 println("White piano key pressed: $it")
             }
             naturalTonePianoKey.onKeyReleased = {
+                var noteTimeDuration =
+                    SystemClock.elapsedRealtime() - recordingTimeChronometer.base - noteStartTime
+                val note = PianoSheet(it, noteStartTime, noteTimeDuration)
+                pianoKeysList.add(note)
+
                 println("White piano key released: $it")
             }
 
@@ -46,10 +63,18 @@ class PianoLayout : Fragment() {
         semiTones.forEach {
             val semiTone = WhitePianoKeysFragment.newInstance(it)
 
+            var noteStartTime: Long = 0
+
             semiTone.onKeyPressed = {
+                noteStartTime = SystemClock.elapsedRealtime() - recordingTimeChronometer.base
                 println("White piano key pressed: $it")
             }
             semiTone.onKeyReleased = {
+                var noteTimeDuration =
+                    SystemClock.elapsedRealtime() - recordingTimeChronometer.base - noteStartTime
+                val note = PianoSheet(it, noteStartTime, noteTimeDuration)
+                pianoKeysList.add(note)
+
                 println("White piano key released: $it")
             }
 
@@ -58,6 +83,74 @@ class PianoLayout : Fragment() {
 
         fragmentTransaction.commit()
 
+        view.startStopRecording.setOnClickListener {
+            if (!isRecording) {
+                pianoKeysList.clear()
+                startRecordingTimer()
+                startStopRecording.text = "Stop REC"
+            } else {
+                stopRecordingTimer()
+                startStopRecording.text = "Reset REC"
+            }
+        }
+
+        view.saveMusicSheet.setOnClickListener {
+            var fileName = view.fileNameInput.text.toString()
+            val filePath = this.activity?.getExternalFilesDir(null)
+            val newMusicFile = (File(filePath, fileName))
+
+            when {
+                pianoKeysList.count() == 0 -> Toast.makeText(
+                    activity,
+                    "Please enter some notes",
+                    Toast.LENGTH_SHORT
+                ).show()
+                fileName.isEmpty() -> Toast.makeText(
+                    activity,
+                    "Please enter a file name",
+                    Toast.LENGTH_SHORT
+                ).show()
+                filePath == null -> Toast.makeText(
+                    activity,
+                    "Path does not exist",
+                    Toast.LENGTH_SHORT
+                ).show()
+                newMusicFile.exists() -> Toast.makeText(
+                    activity,
+                    "File already exists",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                else -> {
+                    fileName = "$fileName.music"
+                    FileOutputStream(newMusicFile, true).bufferedWriter().use { writer ->
+                        pianoKeysList.forEach {
+                            writer.write("${it.toString()}\n")
+                        }
+                    }
+                    Toast.makeText(activity, "Your file has been saved!", Toast.LENGTH_SHORT).show()
+                    pianoKeysList.clear()
+                    fileNameInput.text.clear()
+                    FileOutputStream(newMusicFile).close()
+                }
+            }
+        }
         return view
     }
+
+    private fun startRecordingTimer(){
+        if (!isRecording){
+            recordingTimeChronometer.base = SystemClock.elapsedRealtime()
+            recordingTimeChronometer.start()
+            isRecording = true
+        }
+    }
+
+    private fun stopRecordingTimer(){
+        if (isRecording){
+            recordingTimeChronometer.stop()
+            isRecording = false
+        }
+    }
+
 }

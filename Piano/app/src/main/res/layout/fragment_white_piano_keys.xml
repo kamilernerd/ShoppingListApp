@@ -6,10 +6,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".WhitePianoKeysFragment">
 
+
     <Button
         android:id="@+id/whitePianoKeyButton"
-        android:layout_width="30dp"
-        android:layout_height="144dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-9dp" />
+        android:layout_width="50dp"
+        android:layout_height="150dp"
+        app:layout_constraintHeight_percent="0.50"
+        android:layout_margin="0.5dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/pianokeyshape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
