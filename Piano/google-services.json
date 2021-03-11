@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "338447145363",
+    "project_id": "app-01-ikt205",
+    "storage_bucket": "app-01-ikt205.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338447145363:android:d26c1441427c6c2a3d7066",
+        "android_client_info": {
+          "package_name": "com.kamil.piano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338447145363-otebl4j87vkt27hc9dlto47oggf3c5qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjYSv6J8CplAmWKMnIyW2KxD5qW6m1-EE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338447145363-otebl4j87vkt27hc9dlto47oggf3c5qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
