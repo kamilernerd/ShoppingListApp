@@ -7,10 +7,11 @@ import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 
 class ListCollectionAdapter(private val lists: MutableList<ListData>,
-                            private val onBookClicked:(ListData) -> Unit
+                            private val onListTouch: (position: Int) -> Unit,
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        // Assign values to card view
         fun bind(list: ListData) {
             binding.listId.text = list.id
             binding.listName.text = list.listName
@@ -20,8 +21,14 @@ class ListCollectionAdapter(private val lists: MutableList<ListData>,
     override fun getItemCount(): Int = lists.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val book = lists[position]
-        holder.bind(book)
+        val list = lists[position]
+        holder.bind(list)
+
+        // Delete list from recycler view
+        holder.binding.deleteListButton.setOnClickListener {
+            val newList = lists.removeAt(position)
+            holder.bind(newList)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

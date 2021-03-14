@@ -3,22 +3,22 @@ package com.kamil.shoppinglist
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     private var listsCollection: MutableList<ListData> = mutableListOf(
-        ListData("1", "List 1"),
-        ListData("2", "List 2"),
-        ListData("3", "List 3"),
-        ListData("4", "List 4"),
-        ListData("5", "List 5"),
+        ListData("0", "List 1"),
+        ListData("1", "List 2"),
+        ListData("2", "List 3"),
+        ListData("3", "List 4"),
+        ListData("4", "List 5"),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.listCollection.layoutManager = LinearLayoutManager(this)
-        binding.listCollection.adapter = ListCollectionAdapter(listsCollection, this::onListClicked)
+        binding.listCollection.adapter = ListCollectionAdapter(listsCollection, this::onListTouch)
 
         binding.saveListButton.setOnClickListener {
             val title = binding.title.text.toString()
@@ -40,11 +40,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addNewList(title: String) {
-        val list = ListData((listsCollection.size + 1).toString(), title)
+        val list = ListData((listsCollection.size).toString(), title)
         listsCollection.add(list)
     }
 
-    private fun onListClicked(list: ListData):Unit {
-        // Vis detalje side for bok.
+    private fun onListTouch(position: Int): Unit {
+        Log.println(Log.INFO, "Main activity", "HELLO LIST TOUCH!")
     }
 }
