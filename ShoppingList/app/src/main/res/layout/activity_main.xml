@@ -2,18 +2,16 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_background"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:id="@+id/mainActivityLayout"
+    tools:context=".MainActivity"
+    >
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/listsLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.kamil.shoppinglist.ListsLayoutFragment"
-        />
+        android:name="com.kamil.shoppinglist.ListLayoutFragment" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
