@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ShoppingList</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="header_message">Shopping lists</string>
+    <string name="content_description_button_new_list">Button for adding new list</string>
+</resources>
