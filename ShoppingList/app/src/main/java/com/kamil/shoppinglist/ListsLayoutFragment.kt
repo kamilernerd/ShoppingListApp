@@ -9,7 +9,7 @@ import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.data.ShoppingList
 import com.kamil.shoppinglist.databinding.FragmentListsLayoutBinding
 
-class ListsLayout : Fragment() {
+class ListsLayoutFragment : Fragment() {
 
     private var _binding: FragmentListsLayoutBinding? = null
     private val binding get() = _binding!!
@@ -38,24 +38,28 @@ class ListsLayout : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListsLayoutBinding.inflate(layoutInflater)
-        val view = binding.root
 
         var fragmentManager = childFragmentManager
         var fragmentTransaction = fragmentManager.beginTransaction()
 
         shoppingListSet.forEach {
-            val listsList = ListsList.newInstance(it.listName, it.listItems)
-            fragmentTransaction.add(R.id.listsList, listsList, it.listName)
+            val listsList = ListsListFragment.newInstance(it.listName, it.listItems)
+
+            listsList.onKeyPressed = {
+                print("HEI")
+            }
+
+            fragmentTransaction.add(binding.listsList.id, listsList, it.listName)
         }
 
         fragmentTransaction.commit()
 
-        return view
+        return binding.root
     }
 
     companion object {
         fun newInstance(param1: String, param2: String) =
-            ListsLayout().apply {
+            ListsLayoutFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

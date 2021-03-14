@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ListsList">
+    tools:context=".ListsListFragment">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
