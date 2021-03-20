@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
-import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
-class ListCollectionAdapter(
-    private val listsCollectionViewModel: ListsCollectionViewModel,
-    private val onListTouch: (position: Int) -> Unit
+class ListCollectionAdapter(private val lists: MutableList<ListData>,
+                            private val onListTouch: (position: Int) -> Unit,
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -21,18 +19,20 @@ class ListCollectionAdapter(
         }
     }
 
-    override fun getItemCount(): Int = listsCollectionViewModel.getItems().size
+    override fun getItemCount(): Int = lists.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list = listsCollectionViewModel.getItems()[position]
+        val list = lists[position]
         holder.bind(list)
 
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
-            Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
-            Log.println(Log.INFO, "REMOVET LIST AT ", listsCollectionViewModel.getItems()[position].listName.toString())
 
-            listsCollectionViewModel.deleteItem(position, holder)
+            Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
+            Log.println(Log.INFO, "REMOVET LIST AT ", lists[position].listName.toString())
+
+            val newList = lists.removeAt(position)
+            holder.bind(newList)
         }
     }
 
@@ -47,8 +47,8 @@ class ListCollectionAdapter(
     }
 
     public fun updateCollection(newLists: List<ListData>) {
-        listsCollectionViewModel.getItems().clear()
-        listsCollectionViewModel.getItems().addAll(newLists)
+        lists.clear()
+        lists.addAll(newLists)
         notifyDataSetChanged()
     }
 }
