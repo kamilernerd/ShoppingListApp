@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         binding.listCollection.layoutManager = LinearLayoutManager(this)
         binding.listCollection.adapter = ListCollectionAdapter(listsCollection, this::onListTouch)
 
-        binding.saveListButton.setOnClickListener {
-            val title = binding.title.text.toString()
-            binding.title.setText("")
+        binding.addNewButton.setOnClickListener {
+//            val title = binding.title.text.toString()
+//            binding.title.setText("")
 
-            addNewList(title)
+//            addNewList(title)
             val ipm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             ipm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }

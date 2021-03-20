@@ -75,37 +75,11 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add" />
-
-    <LinearLayout
-        android:id="@+id/addNewListForm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
-
-
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Liste navn"
-            android:inputType="text" />
-
-        <Button
-            android:id="@+id/saveListButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save" />
-
-    </LinearLayout>
-
-    "
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

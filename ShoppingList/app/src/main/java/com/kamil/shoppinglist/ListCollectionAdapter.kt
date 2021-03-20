@@ -1,5 +1,6 @@
 package com.kamil.shoppinglist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,10 @@ class ListCollectionAdapter(private val lists: MutableList<ListData>,
 
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
+
+            Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
+            Log.println(Log.INFO, "REMOVET LIST AT ", lists[position].listName.toString())
+
             val newList = lists.removeAt(position)
             holder.bind(newList)
         }
