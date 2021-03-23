@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class AddNewListDialogFragment(
     private var listsCollectionViewModel: ListsCollectionViewModel,
-    ListCollectionAdapter: RecyclerView
+    private val ListCollectionAdapter: RecyclerView
 ) : DialogFragment() {
 
     private var _binding: AddNewListDialogFragmentBinding? = null
@@ -49,7 +49,7 @@ class AddNewListDialogFragment(
 
         binding.dialogSaveButton.setOnClickListener {
 
-            var listName = binding.listNameInputField.text
+            val listName = binding.listNameInputField.text
 
             if (listName.isEmpty() || listName.length <= 0) {
                 binding.listNameInputField.error = resources.getString(R.string.missingFieldNameError);

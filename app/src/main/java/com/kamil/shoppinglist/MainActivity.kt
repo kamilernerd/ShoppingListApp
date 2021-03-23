@@ -1,10 +1,13 @@
 package com.kamil.shoppinglist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
+import com.kamil.shoppinglist.databinding.ListContentViewFragmentBinding
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
@@ -32,6 +35,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onListTouch(position: Int): Unit {
-        Log.println(Log.INFO, "Main activity", "HELLO LIST TOUCH!")
+        Log.println(Log.INFO, "Main activity", "HELLO LIST TOUCH! ${position}")
+
+        supportFragmentManager.beginTransaction().add(
+            binding.mainActivityLayout.id,
+            ListContentViewFragment(
+                listsCollectionViewModel,
+                binding.listCollection
+            )
+        ).commit()
     }
 }

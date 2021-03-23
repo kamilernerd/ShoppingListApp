@@ -8,10 +8,10 @@ import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
-class ListCollectionAdapter(
+class ListItemsCollectionAdapter(
     private val listsCollectionViewModel: ListsCollectionViewModel,
     private val onListTouch: (position: Int) -> Unit
-): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
+): RecyclerView.Adapter<ListItemsCollectionAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         // Assign values to card view
@@ -36,7 +36,7 @@ class ListCollectionAdapter(
             Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
             Log.println(Log.INFO, "REMOVET LIST AT ", listsCollectionViewModel.getItems()[position].listName.toString())
 
-            listsCollectionViewModel.deleteItem(position, holder)
+            listsCollectionViewModel.deleteItem(position)
         }
     }
 
