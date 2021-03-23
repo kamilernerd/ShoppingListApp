@@ -35,7 +35,7 @@ class ListCollectionAdapter(
                     R.id.listCollectionParentContainer,
                     ListContentViewFragment(
                         listsCollectionViewModel,
-                        position
+                        position.toString()
                     )
                 ).addToBackStack(ListContentViewFragment.TAG).commit()
             }

@@ -8,6 +8,7 @@
     <string name="listNameHint">List name</string>
     <string name="button_add_new_list_aria">Add new list</string>
     <string name="top_bar_text">Shopping lists</string>
+    <string name="itemNameHint">Item name</string>
     <!-- ERROR MESSAGES -->
     <string name="missingFieldNameError">List name cannot be empty!</string>
 </resources>

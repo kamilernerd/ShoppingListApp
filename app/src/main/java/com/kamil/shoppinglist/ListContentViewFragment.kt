@@ -17,7 +17,7 @@ import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListContentViewFragment(
     ListsCollectionViewModel: ListsCollectionViewModel,
-    Position: Int
+    Position: String
 ) : Fragment() {
 
     private lateinit var _binding: ListContentViewFragmentBinding

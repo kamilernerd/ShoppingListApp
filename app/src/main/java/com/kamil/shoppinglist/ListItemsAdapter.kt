@@ -1,25 +1,22 @@
 package com.kamil.shoppinglist
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.data.ListItem
+import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
-import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListItemsAdapter(
-    ListId: Int
+    ListId: String
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private val listItemsViewModel = ListItemsViewModel()
     private val listId = ListId
 
-    class ViewHolder(val binding: ListLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListItem) {
             if (!listId.equals(item.listId)) {
                 return
@@ -44,7 +41,7 @@ class ListItemsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ListLayoutBinding.inflate(
+            ListItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -53,7 +50,7 @@ class ListItemsAdapter(
         )
     }
 
-    public fun updateCollection(newLists: List<ListData>) {
+    public fun updateCollection(newLists: List<ListItem>) {
         listItemsViewModel.getItems().clear()
         listItemsViewModel.getItems().addAll(newLists)
         notifyDataSetChanged()

@@ -9,19 +9,19 @@ import com.kamil.shoppinglist.data.ListItem
 class ListItemsViewModel : ViewModel() {
 
     private var listItems: MutableList<ListItem> = mutableListOf(
-        ListItem("0", "List 1", "1"),
-        ListItem("1", "List 2", "1"),
-        ListItem("2", "List 3", "1"),
-        ListItem("3", "List 4", "2"),
-        ListItem("4", "List 5", "2"),
+        ListItem("0", "Item 1", "1"),
+        ListItem("1", "Item 2", "1"),
+        ListItem("2", "Item 3", "1"),
+        ListItem("3", "Item 4", "2"),
+        ListItem("4", "Item 5", "2"),
     )
 
     /**
      * Add new list
      * Automatically creates ID
      */
-    fun addItem(title: String) {
-        val listItem = ListItem((listItems.size).toString(), title)
+    fun addItem(title: String, listId: String) {
+        val listItem = ListItem((listItems.size).toString(), title, listId)
         listItems.add(listItem)
     }
 
