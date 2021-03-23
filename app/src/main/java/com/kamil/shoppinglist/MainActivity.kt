@@ -4,12 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
-import com.kamil.shoppinglist.databinding.ListContentViewFragmentBinding
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.listCollection.layoutManager = LinearLayoutManager(this)
-        binding.listCollection.adapter = ListCollectionAdapter(listsCollectionViewModel, this::onListTouch)
+        binding.listCollection.adapter = ListCollectionAdapter(listsCollectionViewModel)
 
         binding.addNewButton.setOnClickListener {
             AddNewListDialogFragment(
@@ -32,17 +31,5 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager, AddNewListDialogFragment.TAG
             )
         }
-    }
-
-    private fun onListTouch(position: Int): Unit {
-        Log.println(Log.INFO, "Main activity", "HELLO LIST TOUCH! ${position}")
-
-        supportFragmentManager.beginTransaction().add(
-            binding.mainActivityLayout.id,
-            ListContentViewFragment(
-                listsCollectionViewModel,
-                binding.listCollection
-            )
-        ).commit()
     }
 }

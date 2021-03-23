@@ -2,15 +2,16 @@ package com.kamil.shoppinglist
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListCollectionAdapter(
-    private val listsCollectionViewModel: ListsCollectionViewModel,
-    private val onListTouch: (position: Int) -> Unit
+    private val listsCollectionViewModel: ListsCollectionViewModel
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -27,9 +28,18 @@ class ListCollectionAdapter(
         val list = listsCollectionViewModel.getItems()[position]
         holder.bind(list)
 
-        holder.itemView.setOnClickListener {
-            this.onListTouch(position)
-        }
+        holder.itemView.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                val view = v?.context as AppCompatActivity
+                view.supportFragmentManager.beginTransaction().replace(
+                    R.id.listCollectionParentContainer,
+                    ListContentViewFragment(
+                        listsCollectionViewModel,
+                        position
+                    )
+                ).addToBackStack(ListContentViewFragment.TAG).commit()
+            }
+        })
 
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
