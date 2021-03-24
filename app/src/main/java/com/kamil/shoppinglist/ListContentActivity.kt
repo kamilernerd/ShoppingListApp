@@ -15,7 +15,6 @@ class ListContentActivity : Activity() {
         binding = ListContentActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val position = intent.getStringExtra(LIST_ID).toString()
         val listName = intent.getStringExtra(LIST_NAME).toString()
         Log.println(Log.WARN, "HEI:", "OPENED LIST AT POSITION ${position}")

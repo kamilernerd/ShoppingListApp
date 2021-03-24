@@ -68,6 +68,16 @@
             app:layout_constraintVertical_bias="0.125"
             tools:text="@string/itemNameHint" />
 
+        <Switch
+            android:id="@+id/checkFinished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/deleteListButton"
+            app:layout_constraintStart_toEndOf="@+id/listId"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

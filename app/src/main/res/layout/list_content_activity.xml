@@ -8,7 +8,7 @@
     android:background="@color/app_background"
     android:scrollbars="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="174dp"
@@ -22,6 +22,7 @@
                     android:id="@+id/listNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/listItems"
                     android:textSize="34sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -32,28 +33,42 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/itemsListContainer"
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/itemsListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/listItemsParentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            tools:context=".ListContentActivity">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/listItemsParentContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".MainActivity">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listItems"
+                android:layout_width="381dp"
+                android:layout_height="518dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="60dp"
+                android:scrollIndicators="top|bottom"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/listItems"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="20dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.recyclerview.widget.RecyclerView>
 
-        </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addNewItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

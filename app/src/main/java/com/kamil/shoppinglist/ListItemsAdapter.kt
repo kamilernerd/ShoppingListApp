@@ -1,5 +1,6 @@
 package com.kamil.shoppinglist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +35,13 @@ class ListItemsAdapter(
         val itemsList = listItemsViewModel.getItems()[itemPosition]
         holder.bind(itemsList)
 
-        // Delete list from recycler view
-//        holder.binding.deleteListButton.setOnClickListener {
-//        }
+        holder.binding.deleteListButton.setOnClickListener {
+            Log.println(Log.INFO, "REMOVET AT INDEX ", itemPosition.toString())
+            Log.println(Log.INFO, "REMOVET LIST AT ", listItemsViewModel.getItems()[itemPosition].itemName.toString())
+
+            listItemsViewModel.deleteItem(itemPosition, holder)
+            notifyItemRemoved(itemPosition)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,8 +56,9 @@ class ListItemsAdapter(
     }
 
     public fun updateCollection(newLists: List<ListItem>) {
-        listItemsViewModel.getItems().clear()
-        listItemsViewModel.getItems().addAll(newLists)
-        notifyDataSetChanged()
+        //listItemsViewModel.getItems().clear()
+        //listItemsViewModel.getItems().addAll(newLists)
+        //listItemsViewModel.getItems().
+        //notifyDataSetChanged()
     }
 }
