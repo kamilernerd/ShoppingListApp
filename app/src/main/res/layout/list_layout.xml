@@ -8,7 +8,7 @@
     android:backgroundTint="@color/purple_500"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="30dp"
     app:contentPadding="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,13 +19,13 @@
             android:id="@+id/deleteListButton"
             android:layout_width="33dp"
             android:layout_height="28dp"
+            android:contentDescription="Delete list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.981"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_delete"
-            android:contentDescription="Delete list" />
+            app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <TextView
             android:id="@+id/listId"
