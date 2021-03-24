@@ -1,49 +1,30 @@
 package com.kamil.shoppinglist
 
 import android.app.Activity
-import android.app.Dialog
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.databinding.ListContentViewFragmentBinding
-import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
-class ListContentViewFragment(
-    ListsCollectionViewModel: ListsCollectionViewModel,
-    Position: String
-) : Fragment() {
+class ListContentViewFragment : Activity() {
 
-    private lateinit var _binding: ListContentViewFragmentBinding
-    private val binding get() = _binding!!
+    private lateinit var binding: ListContentViewFragmentBinding
 
-    private val listCollectionViewModel = ListsCollectionViewModel
-    private val position = Position
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ListContentViewFragmentBinding.inflate(layoutInflater)
+        binding = ListContentViewFragmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        Log.println(Log.WARN, "HEI:", "OPENED LIST AT POSITION ${this.position}")
 
-        binding.listItems.layoutManager = LinearLayoutManager(context)
+        val position = intent.getStringExtra(LIST_ID).toString()
+        Log.println(Log.WARN, "HEI:", "OPENED LIST AT POSITION ${position}")
+
+        binding.listItems.layoutManager = LinearLayoutManager(this)
         binding.listItems.adapter = ListItemsAdapter(position)
-
-        return binding.root
     }
 
     companion object {
-        const val TAG = "ListContentViewFragment"
+        const val LIST_ID = "id"
     }
 
 }

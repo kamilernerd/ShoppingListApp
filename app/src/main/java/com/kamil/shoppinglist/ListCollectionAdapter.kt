@@ -1,11 +1,13 @@
 package com.kamil.shoppinglist
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.kamil.shoppinglist.ListContentViewFragment.Companion.LIST_ID
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
@@ -31,13 +33,9 @@ class ListCollectionAdapter(
         holder.itemView.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
                 val view = v?.context as AppCompatActivity
-                view.supportFragmentManager.beginTransaction().replace(
-                    R.id.listCollectionParentContainer,
-                    ListContentViewFragment(
-                        listsCollectionViewModel,
-                        position.toString()
-                    )
-                ).addToBackStack(ListContentViewFragment.TAG).commit()
+
+                val intent = Intent(view, ListContentViewFragment::class.java).putExtra(LIST_ID, position.toString())
+                view.startActivity(intent)
             }
         })
 
