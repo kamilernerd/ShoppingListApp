@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.kamil.shoppinglist.ListContentViewFragment.Companion.LIST_ID
+import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_ID
+import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
@@ -17,7 +18,6 @@ class ListCollectionAdapter(
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        // Assign values to card view
         fun bind(list: ListData) {
             binding.listId.text = list.id
             binding.listName.text = list.listName
@@ -34,7 +34,9 @@ class ListCollectionAdapter(
             override fun onClick(v: View?) {
                 val view = v?.context as AppCompatActivity
 
-                val intent = Intent(view, ListContentViewFragment::class.java).putExtra(LIST_ID, position.toString())
+                val intent = Intent(view, ListContentActivity::class.java)
+                    .putExtra(LIST_ID, position.toString())
+                    .putExtra(LIST_NAME, list.listName)
                 view.startActivity(intent)
             }
         })

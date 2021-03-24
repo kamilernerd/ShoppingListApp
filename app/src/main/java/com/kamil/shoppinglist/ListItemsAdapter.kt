@@ -46,7 +46,7 @@ class ListItemsAdapter(
                 parent,
                 false
             ),
-            listId
+            listId,
         )
     }
 
