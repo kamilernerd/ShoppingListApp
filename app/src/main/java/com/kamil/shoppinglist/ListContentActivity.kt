@@ -3,10 +3,11 @@ package com.kamil.shoppinglist
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ListContentActivityBinding
 
-class ListContentActivity : Activity() {
+class ListContentActivity : AppCompatActivity() {
 
     private lateinit var binding: ListContentActivityBinding
 
