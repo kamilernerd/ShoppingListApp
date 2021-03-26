@@ -40,7 +40,7 @@ class AddNewListDialogFragment(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AddNewListDialogFragmentBinding.inflate(layoutInflater)
 
         binding.dialogCancelButton.setOnClickListener {
@@ -55,7 +55,7 @@ class AddNewListDialogFragment(
                 binding.listNameInputField.error = resources.getString(R.string.missingFieldNameError);
                 binding.listNameInputField.requestFocus();
             } else {
-                listsCollectionViewModel.addItem(listName.toString())
+                listsCollectionViewModel.addList(listName.toString())
                 listCollectionAdapter.adapter?.notifyDataSetChanged()
                 dialog?.hide()
                 dialog?.cancel()

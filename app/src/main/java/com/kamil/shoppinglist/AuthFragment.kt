@@ -1,13 +1,8 @@
 package com.kamil.shoppinglist
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -34,7 +29,6 @@ class AuthFragment : AppCompatActivity() {
 
         email = "kamil.oracz98@gmail.com"
         password = "123456"
-
 
         binding.signInButton.setOnClickListener {
             auth.signInWithEmailAndPassword(email, password)

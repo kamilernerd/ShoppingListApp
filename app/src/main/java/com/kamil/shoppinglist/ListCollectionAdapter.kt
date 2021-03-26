@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
+import com.kamil.shoppinglist.AuthFragment.Companion.TAG
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_ID
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.data.ListData
@@ -16,6 +18,10 @@ import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 class ListCollectionAdapter(
     private val listsCollectionViewModel: ListsCollectionViewModel
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
+
+    init {
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(list: ListData) {
@@ -46,7 +52,7 @@ class ListCollectionAdapter(
             Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
             Log.println(Log.INFO, "REMOVET LIST AT ", listsCollectionViewModel.getItems()[position].listName.toString())
 
-            listsCollectionViewModel.deleteItem(position, holder)
+//            listsCollectionViewModel.deleteItem(position, holder)
         }
     }
 
@@ -58,11 +64,5 @@ class ListCollectionAdapter(
                 false
             )
         )
-    }
-
-    public fun updateCollection(newLists: List<ListData>) {
-        listsCollectionViewModel.getItems().clear()
-        listsCollectionViewModel.getItems().addAll(newLists)
-        notifyDataSetChanged()
     }
 }
