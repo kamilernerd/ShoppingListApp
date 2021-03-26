@@ -38,6 +38,10 @@ class ListItemsViewModel(
     }
 
     fun deleteItem(index: Int) {
+        if (listItems.isEmpty()) {
+            return
+        }
+
         listItems.removeAt(index)
         database.child(DATABASE_PATH).child(userId).child(listId).setValue(listItems).addOnSuccessListener {
             Log.println(Log.WARN, "REMOVE ITEM", "ok")

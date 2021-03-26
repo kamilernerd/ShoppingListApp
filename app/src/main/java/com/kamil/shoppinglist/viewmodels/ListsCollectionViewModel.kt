@@ -36,6 +36,10 @@ class ListsCollectionViewModel(
     }
 
     fun deleteItem(index: Int) {
+        if (listsCollection.isEmpty()) {
+            return
+        }
+
         listsCollection.removeAt(index)
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
             Log.println(Log.WARN, "REMOVE", "REMOVED LIST")
@@ -64,26 +68,6 @@ class ListsCollectionViewModel(
                 it.getValue<ListData>(ListData::class.java)
             }
         }
-    }
-
-    fun startReadingListener() {
-        val listsListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    listsCollection.clear()
-                }
-
-                dataSnapshot.children.mapNotNullTo(listsCollection) {
-                    dataSnapshot.getValue<ListData>(ListData::class.java)
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        database.addValueEventListener(listsListener)
     }
 
     companion object {
