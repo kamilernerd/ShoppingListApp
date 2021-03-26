@@ -14,6 +14,7 @@ import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.ListContentActivity.Companion.USER_ID
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
+import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListCollectionAdapter(
@@ -24,6 +25,7 @@ class ListCollectionAdapter(
         notifyDataSetChanged()
     }
 
+    // Map list name to list item in the view
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(list: ListData) {
             binding.listId.text = list.id
@@ -37,6 +39,7 @@ class ListCollectionAdapter(
         val list = listsCollectionViewModel.getItems()[position]
         holder.bind(list)
 
+        // Open new activity when clicking on a list
         holder.itemView.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
                 val view = v?.context as AppCompatActivity
@@ -51,8 +54,6 @@ class ListCollectionAdapter(
 
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
-            Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
-            Log.println(Log.INFO, "REMOVET LIST AT ", listsCollectionViewModel.getItems()[position].listName.toString())
             listsCollectionViewModel.deleteItem(position)
             notifyItemRemoved(position)
         }

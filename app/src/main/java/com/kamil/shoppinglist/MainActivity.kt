@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 

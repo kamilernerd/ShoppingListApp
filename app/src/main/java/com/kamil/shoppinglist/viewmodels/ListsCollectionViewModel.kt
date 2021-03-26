@@ -38,7 +38,13 @@ class ListsCollectionViewModel(
     fun deleteItem(index: Int) {
         listsCollection.removeAt(index)
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
-            Log.println(Log.WARN, "REMOVE ITEM", "ok")
+            Log.println(Log.WARN, "REMOVE", "REMOVED LIST")
+
+            database.child(ListItemsViewModel.DATABASE_PATH).child(userId).child(index.toString()).setValue(null).addOnCompleteListener {
+                Log.println(Log.WARN, "REMOVED", "REMOVED ALL CONNECTED ITEMS")
+            }.addOnCanceledListener {
+                Log.println(Log.WARN, "REMOVE", "COULD NOT REMOVE ALL CONNECTED ITEMS")
+            }
         }.addOnCanceledListener {
             Log.println(Log.WARN, "REMOVE ITEM", "not ok")
         }

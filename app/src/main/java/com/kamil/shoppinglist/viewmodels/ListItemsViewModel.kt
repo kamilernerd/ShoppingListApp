@@ -63,7 +63,7 @@ class ListItemsViewModel(
     }
 
     companion object {
-        private val DATABASE_PATH = "listItems"
+        public val DATABASE_PATH = "listItems"
         private val TAG = "LIST_ITEMS_VIEW_MODEL"
     }
 
