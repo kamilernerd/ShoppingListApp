@@ -36,9 +36,6 @@ class ListItemsAdapter(
         holder.bind(itemsList)
 
         holder.binding.deleteListButton.setOnClickListener {
-            Log.println(Log.INFO, "REMOVET AT INDEX ", itemPosition.toString())
-            Log.println(Log.INFO, "REMOVET LIST AT ", listItemsViewModel.getItems()[itemPosition].itemName.toString())
-
             listItemsViewModel.deleteItem(itemPosition)
             notifyItemRemoved(itemPosition)
         }
