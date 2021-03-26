@@ -1,59 +1,70 @@
 package com.kamil.shoppinglist.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.kamil.shoppinglist.ListCollectionAdapter
 import com.kamil.shoppinglist.ListItemsAdapter
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.data.ListItem
 
-class ListItemsViewModel : ViewModel() {
+class ListItemsViewModel(
+    private val listId: String,
+    private val userId: String
+) : ViewModel() {
 
-    private var listItems: MutableList<ListItem> = mutableListOf(
-        ListItem("0", "Item 1", "1"),
-        ListItem("1", "Item 2", "1"),
-        ListItem("2", "Item 3", "1"),
-        ListItem("3", "Item 4", "2"),
-        ListItem("4", "Item 5", "2"),
-    )
+    private var listItems: MutableList<ListItem> = mutableListOf()
 
-    /**
-     * Add new list
-     * Automatically creates ID
-     */
-    fun addItem(title: String, listId: String) {
-        val listItem = ListItem((listItems.size).toString(), title, listId)
-        listItems.add(listItem)
+    private lateinit var reference: DatabaseReference
+    private var database = FirebaseDatabase.getInstance().reference
+
+    init {
+        database.keepSynced(true)
     }
 
-    /**
-     * Add new list
-     */
-    fun addItem(title: String, id: Int, listId: String) {
-        val listItem = ListItem(id.toString(), title, listId)
-        listItems.add(listItem)
+    fun addItem(title: String) {
+        val itemId = database.child(DATABASE_PATH).push().key
+        listItems.add(ListItem(itemId.toString(), title, listId))
+
+        database.child(DATABASE_PATH).child(userId).child(listId).setValue(listItems).addOnSuccessListener {
+            Log.println(Log.WARN, "ADD ITEM", "ok")
+        }.addOnCanceledListener {
+            Log.println(Log.WARN, "ADD ITEM", "not ok")
+        }
     }
 
-    /**
-     * Delete directly at index
-     * and bind ViewHolder
-     */
-    fun deleteItem(index: Int, holder: ListItemsAdapter.ViewHolder) {
-        val newList = listItems.removeAt(index)
-        holder.bind(newList)
-    }
-
-    /**
-     * Delete directly at index
-     * */
     fun deleteItem(index: Int) {
         listItems.removeAt(index)
+        database.child(DATABASE_PATH).child(userId).child(listId).setValue(listItems).addOnSuccessListener {
+            Log.println(Log.WARN, "REMOVE ITEM", "ok")
+        }.addOnCanceledListener {
+            Log.println(Log.WARN, "REMOVE ITEM", "not ok")
+        }
     }
 
-    /**
-     * Get list collection reference
-     */
     fun getItems(): MutableList<ListItem> {
-        return this.listItems
+        return listItems
+    }
+
+    fun read(): Task<DataSnapshot> {
+        return database.child(DATABASE_PATH).child(userId).child(listId).get().addOnSuccessListener {
+            if (it.exists()) {
+                listItems.clear()
+            }
+
+            it.children.mapNotNullTo(listItems) {
+                it.getValue<ListItem>(ListItem::class.java)
+            }
+        }
+    }
+
+    companion object {
+        private val DATABASE_PATH = "listItems"
+        private val TAG = "LIST_ITEMS_VIEW_MODEL"
     }
 
 }

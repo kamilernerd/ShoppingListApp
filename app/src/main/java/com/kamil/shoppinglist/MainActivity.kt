@@ -48,6 +48,11 @@ class MainActivity : AppCompatActivity() {
                 binding.magicSpinner.visibility = View.GONE
                 binding.listCollectionParentContainer.visibility = View.VISIBLE
             }
+            // Add check if dataset is = 0 then display some cool text
+
+        }.addOnCanceledListener {
+            // TODO
+            // Add small text saying that list could not be fetched
         }
 
         binding.addNewButton.setOnClickListener {
@@ -57,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             ).show(
                 supportFragmentManager, AddNewListDialogFragment.TAG
             )
-//            listCollectionAdapter.notifyDataSetChanged()
         }
     }
 }

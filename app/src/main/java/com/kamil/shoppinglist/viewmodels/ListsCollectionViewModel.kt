@@ -37,15 +37,19 @@ class ListsCollectionViewModel(
 
     fun deleteItem(index: Int) {
         listsCollection.removeAt(index)
+        database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
+            Log.println(Log.WARN, "REMOVE ITEM", "ok")
+        }.addOnCanceledListener {
+            Log.println(Log.WARN, "REMOVE ITEM", "not ok")
+        }
     }
 
     fun getItems(): MutableList<ListData> {
-        read()
         return listsCollection
     }
 
     fun read(): Task<DataSnapshot> {
-        return database.child("lists").child(userId).get().addOnSuccessListener {
+        return database.child(DATABASE_PATH).child(userId).get().addOnSuccessListener {
             if (it.exists()) {
                 listsCollection.clear()
             }

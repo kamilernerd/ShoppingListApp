@@ -11,10 +11,10 @@ import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 
 class ListItemsAdapter(
-    ListId: String
+    private val listItemsViewModel: ListItemsViewModel,
+    private val ListId: String
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
-    private val listItemsViewModel = ListItemsViewModel()
     private val listId = ListId
 
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
@@ -39,7 +39,7 @@ class ListItemsAdapter(
             Log.println(Log.INFO, "REMOVET AT INDEX ", itemPosition.toString())
             Log.println(Log.INFO, "REMOVET LIST AT ", listItemsViewModel.getItems()[itemPosition].itemName.toString())
 
-            listItemsViewModel.deleteItem(itemPosition, holder)
+            listItemsViewModel.deleteItem(itemPosition)
             notifyItemRemoved(itemPosition)
         }
     }

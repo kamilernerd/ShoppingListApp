@@ -11,6 +11,7 @@ import com.google.firebase.database.*
 import com.kamil.shoppinglist.AuthFragment.Companion.TAG
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_ID
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
+import com.kamil.shoppinglist.ListContentActivity.Companion.USER_ID
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
@@ -43,6 +44,7 @@ class ListCollectionAdapter(
                 val intent = Intent(view, ListContentActivity::class.java)
                     .putExtra(LIST_ID, position.toString())
                     .putExtra(LIST_NAME, list.listName)
+                    .putExtra(USER_ID, list.userId)
                 view.startActivity(intent)
             }
         })
@@ -51,8 +53,8 @@ class ListCollectionAdapter(
         holder.binding.deleteListButton.setOnClickListener {
             Log.println(Log.INFO, "REMOVET AT INDEX ", position.toString())
             Log.println(Log.INFO, "REMOVET LIST AT ", listsCollectionViewModel.getItems()[position].listName.toString())
-
-//            listsCollectionViewModel.deleteItem(position, holder)
+            listsCollectionViewModel.deleteItem(position)
+            notifyItemRemoved(position)
         }
     }
 
