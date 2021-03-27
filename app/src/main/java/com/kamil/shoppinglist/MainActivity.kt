@@ -64,8 +64,6 @@ class MainActivity : AppCompatActivity() {
         binding.emptyListLayout.visibility = View.GONE
 
         listsCollectionViewModel.read().addOnCompleteListener {
-            listCollectionAdapter.notifyDataSetChanged()
-
             if (it.isComplete) {
                 binding.magicSpinner.visibility = View.GONE
 
@@ -91,6 +89,9 @@ class MainActivity : AppCompatActivity() {
             ).show(
                 supportFragmentManager, AddNewListDialogFragment.TAG
             )
+
+            listCollectionAdapter.notifyDataSetChanged()
+            //listCollectionAdapter.notifyItemInserted(listsCollectionViewModel.getItems().count() + 1)
         }
     }
 }

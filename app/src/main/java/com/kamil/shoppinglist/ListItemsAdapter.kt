@@ -46,6 +46,10 @@ class ListItemsAdapter(
         }
 
         holder.binding.deleteListButton.setOnClickListener {
+            if (holder.adapterPosition <= RecyclerView.NO_POSITION) {
+                return@setOnClickListener
+            }
+
             listItemsViewModel.deleteItem(itemPosition)
             notifyItemRemoved(itemPosition)
         }

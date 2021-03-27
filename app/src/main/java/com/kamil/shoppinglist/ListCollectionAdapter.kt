@@ -13,6 +13,7 @@ import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.ListContentActivity.Companion.USER_ID
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
+import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListCollectionAdapter(
@@ -20,7 +21,7 @@ class ListCollectionAdapter(
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
     init {
-        notifyDataSetChanged()
+//        notifyDataSetChanged()
     }
 
     // Map list name to list item in the view
@@ -52,6 +53,10 @@ class ListCollectionAdapter(
 
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
+            if (holder.adapterPosition <= RecyclerView.NO_POSITION) {
+                return@setOnClickListener
+            }
+
             listsCollectionViewModel.deleteItem(position)
             notifyItemRemoved(position)
         }

@@ -51,10 +51,11 @@ class AddNewListDialogFragment(
                 binding.listNameInputField.requestFocus();
             } else {
                 listsCollectionViewModel.addList(listName.toString())
-                listCollectionAdapter.adapter?.notifyDataSetChanged()
                 dialog?.hide()
                 dialog?.cancel()
             }
+
+            listCollectionAdapter.adapter?.notifyDataSetChanged()
         }
 
         return binding.root
