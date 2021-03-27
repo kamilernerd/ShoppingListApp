@@ -46,9 +46,6 @@ class ListItemsAdapter(
         }
 
         holder.binding.deleteListButton.setOnClickListener {
-            // Hide it preventing user from being able to spam it and crash the app
-            it.visibility = View.GONE
-
             listItemsViewModel.deleteItem(itemPosition)
             notifyItemRemoved(itemPosition)
         }

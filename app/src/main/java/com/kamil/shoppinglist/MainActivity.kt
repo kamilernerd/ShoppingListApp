@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         binding.emptyListLayout.visibility = View.GONE
 
         listsCollectionViewModel.read().addOnCompleteListener {
+            listCollectionAdapter.notifyDataSetChanged()
+
             if (it.isComplete) {
                 binding.magicSpinner.visibility = View.GONE
 

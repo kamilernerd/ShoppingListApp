@@ -52,9 +52,6 @@ class ListCollectionAdapter(
 
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
-            // Hide it preventing user from being able to spam it and crash the app
-            it.visibility = View.GONE
-
             listsCollectionViewModel.deleteItem(position)
             notifyItemRemoved(position)
         }
