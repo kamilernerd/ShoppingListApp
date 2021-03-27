@@ -30,7 +30,7 @@ class ListsCollectionViewModel(
     }
 
     fun deleteItem(index: Int) {
-        if (listsCollection.isEmpty() || index == 0) {
+        if (listsCollection.isEmpty()) {
             return
         }
 

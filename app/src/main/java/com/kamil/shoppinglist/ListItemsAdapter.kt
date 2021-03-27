@@ -2,6 +2,7 @@ package com.kamil.shoppinglist
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListData
@@ -45,6 +46,9 @@ class ListItemsAdapter(
         }
 
         holder.binding.deleteListButton.setOnClickListener {
+            // Hide it preventing user from being able to spam it and crash the app
+            it.visibility = View.GONE
+
             listItemsViewModel.deleteItem(itemPosition)
             notifyItemRemoved(itemPosition)
         }
