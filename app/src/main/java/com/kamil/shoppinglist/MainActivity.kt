@@ -65,10 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         listsCollectionViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
-                listCollectionAdapter.notifyDataSetChanged()
                 binding.magicSpinner.visibility = View.GONE
-
-                Log.println(Log.WARN, "HEIEWQNESGFDFNEFWRHGT", it.result?.childrenCount.toString())
 
                 if (it.result?.childrenCount!! > 0) {
                     binding.emptyListLayout.visibility = View.GONE
@@ -77,6 +74,8 @@ class MainActivity : AppCompatActivity() {
                     binding.emptyListLayout.visibility = View.VISIBLE
                     binding.listCollectionParentContainer.visibility = View.GONE
                 }
+
+                listCollectionAdapter.notifyDataSetChanged()
             }
         }.addOnCanceledListener {
             // TODO

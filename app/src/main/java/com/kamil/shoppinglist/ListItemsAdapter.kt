@@ -17,6 +17,10 @@ class ListItemsAdapter(
 
     private val listId = ListId
 
+    init {
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListItem) {
             if (!listId.equals(item.listId)) {
@@ -30,7 +34,7 @@ class ListItemsAdapter(
         }
     }
 
-    override fun getItemCount(): Int = listItemsViewModel.getItems().size
+    override fun getItemCount(): Int = listItemsViewModel.getItems().count()
 
     override fun onBindViewHolder(holder: ViewHolder, itemPosition: Int) {
         val itemsList = listItemsViewModel.getItems()[itemPosition]

@@ -25,27 +25,24 @@ class ListsCollectionViewModel(
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
             Log.println(Log.WARN, "ADD ITEM", "ok")
         }.addOnCanceledListener {
-            Log.println(Log.WARN, "ADD ITEM", "not ok")
+            // Handle in case we can't add list
         }
     }
 
     fun deleteItem(index: Int) {
-        if (listsCollection.isEmpty()) {
+        if (listsCollection.isEmpty() || index == 0) {
             return
         }
 
         listsCollection.removeAt(index)
-
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
-            Log.println(Log.WARN, "REMOVE", "REMOVED LIST")
-
             database.child(ListItemsViewModel.DATABASE_PATH).child(userId).child(index.toString()).setValue(null).addOnCompleteListener {
                 Log.println(Log.WARN, "REMOVED", "REMOVED ALL CONNECTED ITEMS")
             }.addOnCanceledListener {
-                Log.println(Log.WARN, "REMOVE", "COULD NOT REMOVE ALL CONNECTED ITEMS")
+                // Handle in case we can't delete list items
             }
         }.addOnCanceledListener {
-            Log.println(Log.WARN, "REMOVE ITEM", "not ok")
+            // Handle in case we can't delete list
         }
     }
 

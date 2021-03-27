@@ -40,9 +40,7 @@ class ListContentActivity : AppCompatActivity() {
 
         listsItemsViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
-                listItemsAdapter.notifyDataSetChanged()
                 binding.magicSpinner.visibility = View.GONE
-                binding.listItemsParentContainer.visibility = View.VISIBLE
 
                 if (it.result?.childrenCount!! > 0) {
                     binding.emptyListLayout.visibility = View.GONE
@@ -51,8 +49,9 @@ class ListContentActivity : AppCompatActivity() {
                     binding.emptyListLayout.visibility = View.VISIBLE
                     binding.listItemsParentContainer.visibility = View.GONE
                 }
-            }
 
+                listItemsAdapter.notifyDataSetChanged()
+            }
         }.addOnCanceledListener {
             // TODO
             // Add small text saying that list could not be fetched

@@ -1,6 +1,8 @@
 package com.kamil.shoppinglist
 
 import android.content.Intent
+import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +31,7 @@ class ListCollectionAdapter(
         }
     }
 
-    override fun getItemCount(): Int = listsCollectionViewModel.getItems().size
+    override fun getItemCount(): Int = listsCollectionViewModel.getItems().count()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = listsCollectionViewModel.getItems()[position]
@@ -51,7 +53,6 @@ class ListCollectionAdapter(
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
             listsCollectionViewModel.deleteItem(position)
-//            notifyDataSetChanged()
             notifyItemRemoved(position)
         }
     }
