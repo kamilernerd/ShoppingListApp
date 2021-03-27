@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -39,18 +41,43 @@ class MainActivity : AppCompatActivity() {
         binding.listCollection.layoutManager = LinearLayoutManager(this)
         binding.listCollection.adapter = listCollectionAdapter
 
+        val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                Log.println(Log.VERBOSE, "POSITION", target.layoutPosition.toString())
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                Log.println(Log.VERBOSE, "POSITION", direction.toString())
+
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(binding.listCollection)
+
+
         // Show spinner and hide list
         binding.magicSpinner.visibility = View.VISIBLE
         binding.listCollectionParentContainer.visibility = View.GONE
+        binding.emptyListLayout.visibility = View.GONE
 
         listsCollectionViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
                 listCollectionAdapter.notifyDataSetChanged()
                 binding.magicSpinner.visibility = View.GONE
-                binding.listCollectionParentContainer.visibility = View.VISIBLE
-            }
-            // Add check if dataset is = 0 then display some cool text
 
+                if (listCollectionAdapter.itemCount > 0) {
+                    binding.emptyListLayout.visibility = View.GONE
+                    binding.listCollectionParentContainer.visibility = View.VISIBLE
+                } else {
+                    binding.emptyListLayout.visibility = View.VISIBLE
+                    binding.listCollectionParentContainer.visibility = View.GONE
+                }
+            }
         }.addOnCanceledListener {
             // TODO
             // Add small text saying that list could not be fetched

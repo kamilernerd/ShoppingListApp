@@ -40,7 +40,8 @@ class ListsCollectionViewModel(
             return
         }
 
-        listsCollection.removeAt(index)
+        listsCollection.filter { listData: ListData -> listData.id.equals(index) }
+
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
             Log.println(Log.WARN, "REMOVE", "REMOVED LIST")
 

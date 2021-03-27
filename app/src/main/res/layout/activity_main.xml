@@ -12,21 +12,27 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="174dp"
-        android:background="@color/app_background">
+        android:background="@color/app_background"
+        android:defaultFocusHighlightEnabled="false"
+        app:elevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:elevation="0dp">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="99dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="98dp"
+                android:layout_marginBottom="65dp"
                 android:text="@string/top_bar_text"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -69,11 +75,35 @@
 
     <ProgressBar
         android:id="@+id/magicSpinner"
-        style="?android:attr/progressBarStyle"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:translationY="180dp"
+        android:translationZ="0dp"
         app:layout_anchor="@+id/listsContainer"
-        app:layout_anchorGravity="center" />
+        app:layout_anchorGravity="center_horizontal" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emptyListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/noListsText"
+            android:layout_width="246dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="302dp"
+            android:layout_marginEnd="79dp"
+            android:layout_marginBottom="405dp"
+            android:text="@string/noListsText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewButton"

@@ -51,11 +51,4 @@ class ListItemsAdapter(
             listId,
         )
     }
-
-    public fun updateCollection(newLists: List<ListItem>) {
-        //listItemsViewModel.getItems().clear()
-        //listItemsViewModel.getItems().addAll(newLists)
-        //listItemsViewModel.getItems().
-        //notifyDataSetChanged()
-    }
 }

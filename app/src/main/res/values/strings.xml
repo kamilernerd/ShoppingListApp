@@ -9,6 +9,8 @@
     <string name="top_bar_text">Shopping lists</string>
     <string name="itemNameHint">Item name</string>
     <string name="listItems">List items</string>
+    <string name="emptyListText">This list seems to be empty.</string>
+    <string name="noListsText">You have not created any lists yet.</string>
     <!-- ERROR MESSAGES -->
     <string name="missingFieldNameError">List name cannot be empty!</string>
     <!-- Strings related to login -->

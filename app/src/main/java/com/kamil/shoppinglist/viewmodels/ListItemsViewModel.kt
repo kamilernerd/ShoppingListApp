@@ -28,7 +28,7 @@ class ListItemsViewModel(
 
     fun addItem(title: String) {
         val itemId = database.child(DATABASE_PATH).push().key
-        listItems.add(ListItem(itemId.toString(), title, listId))
+        listItems.add(ListItem(itemId.toString(), title, listId, false))
 
         database.child(DATABASE_PATH).child(userId).child(listId).setValue(listItems).addOnSuccessListener {
             Log.println(Log.WARN, "ADD ITEM", "ok")
@@ -47,6 +47,15 @@ class ListItemsViewModel(
             Log.println(Log.WARN, "REMOVE ITEM", "ok")
         }.addOnCanceledListener {
             Log.println(Log.WARN, "REMOVE ITEM", "not ok")
+        }
+    }
+
+    fun checkUncheckItem(index: Int) {
+        listItems[index].checked = !listItems[index].checked
+        database.child(DATABASE_PATH).child(userId).child(listId).setValue(listItems).addOnSuccessListener {
+            Log.println(Log.WARN, "CHECKED ITEM", "ok checked ${listItems[index].checked}")
+        }.addOnCanceledListener {
+            Log.println(Log.WARN, "CHECKED ITEM", "not ok ${listItems[index].checked}")
         }
     }
 
