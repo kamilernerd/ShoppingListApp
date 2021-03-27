@@ -26,6 +26,7 @@ class ListItemsAdapter(
             binding.itemId.text = item.id
             binding.itemName.text = item.itemName
             binding.listId.text = item.listId
+            binding.checkBox.isChecked = item.checked
         }
     }
 
@@ -34,6 +35,10 @@ class ListItemsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, itemPosition: Int) {
         val itemsList = listItemsViewModel.getItems()[itemPosition]
         holder.bind(itemsList)
+
+        holder.binding.checkBox.setOnClickListener {
+            listItemsViewModel.checkUncheckItem(itemPosition)
+        }
 
         holder.binding.deleteListButton.setOnClickListener {
             listItemsViewModel.deleteItem(itemPosition)

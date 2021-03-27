@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val user = intent.getParcelableExtra<FirebaseUser>("USER")
-        Log.println(Log.INFO, "HEI", "${user?.email}")
 
         listsCollectionViewModel = ListsCollectionViewModel(user?.uid.toString())
         listCollectionAdapter = ListCollectionAdapter(listsCollectionViewModel)
@@ -41,24 +40,23 @@ class MainActivity : AppCompatActivity() {
         binding.listCollection.layoutManager = LinearLayoutManager(this)
         binding.listCollection.adapter = listCollectionAdapter
 
-        val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                Log.println(Log.VERBOSE, "POSITION", target.layoutPosition.toString())
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                Log.println(Log.VERBOSE, "POSITION", direction.toString())
-
-            }
-        })
-
-        itemTouchHelper.attachToRecyclerView(binding.listCollection)
-
+//        val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                target: RecyclerView.ViewHolder
+//            ): Boolean {
+//                Log.println(Log.VERBOSE, "POSITION", target.layoutPosition.toString())
+//                return false
+//            }
+//
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                Log.println(Log.VERBOSE, "POSITION", direction.toString())
+//
+//            }
+//        })
+//
+//        itemTouchHelper.attachToRecyclerView(binding.listCollection)
 
         // Show spinner and hide list
         binding.magicSpinner.visibility = View.VISIBLE
@@ -70,7 +68,9 @@ class MainActivity : AppCompatActivity() {
                 listCollectionAdapter.notifyDataSetChanged()
                 binding.magicSpinner.visibility = View.GONE
 
-                if (listCollectionAdapter.itemCount > 0) {
+                Log.println(Log.WARN, "HEIEWQNESGFDFNEFWRHGT", it.result?.childrenCount.toString())
+
+                if (it.result?.childrenCount!! > 0) {
                     binding.emptyListLayout.visibility = View.GONE
                     binding.listCollectionParentContainer.visibility = View.VISIBLE
                 } else {

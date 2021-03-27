@@ -29,11 +29,6 @@ class AddNewListDialogFragment(
 
     override fun onStart() {
         super.onStart()
-
-//        dialog?.window?.setLayout(
-//            WindowManager.LayoutParams.MATCH_PARENT,
-//            WindowManager.LayoutParams.MATCH_PARENT / 2
-//        )
     }
 
     override fun onCreateView(

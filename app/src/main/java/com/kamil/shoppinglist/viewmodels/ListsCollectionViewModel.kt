@@ -4,12 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
-import com.kamil.shoppinglist.ListCollectionAdapter
 import com.kamil.shoppinglist.data.ListData
-import java.util.*
 
 class ListsCollectionViewModel(
     private val userId: String
@@ -17,7 +12,6 @@ class ListsCollectionViewModel(
 
     private val listsCollection: MutableList<ListData> = mutableListOf()
 
-    private lateinit var reference: DatabaseReference
     private var database = FirebaseDatabase.getInstance().reference
 
     init {
@@ -40,7 +34,7 @@ class ListsCollectionViewModel(
             return
         }
 
-        listsCollection.filter { listData: ListData -> listData.id.equals(index) }
+        listsCollection.removeAt(index)
 
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
             Log.println(Log.WARN, "REMOVE", "REMOVED LIST")

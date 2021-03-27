@@ -3,13 +3,8 @@ package com.kamil.shoppinglist.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.kamil.shoppinglist.ListCollectionAdapter
-import com.kamil.shoppinglist.ListItemsAdapter
-import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.data.ListItem
 
 class ListItemsViewModel(
@@ -19,7 +14,6 @@ class ListItemsViewModel(
 
     private var listItems: MutableList<ListItem> = mutableListOf()
 
-    private lateinit var reference: DatabaseReference
     private var database = FirebaseDatabase.getInstance().reference
 
     init {

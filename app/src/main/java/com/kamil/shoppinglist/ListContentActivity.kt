@@ -1,6 +1,5 @@
 package com.kamil.shoppinglist
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -37,14 +36,22 @@ class ListContentActivity : AppCompatActivity() {
         // Show spinner and hide list
         binding.magicSpinner.visibility = View.VISIBLE
         binding.listItemsParentContainer.visibility = View.GONE
+        binding.emptyListLayout.visibility = View.GONE
 
         listsItemsViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
                 listItemsAdapter.notifyDataSetChanged()
                 binding.magicSpinner.visibility = View.GONE
                 binding.listItemsParentContainer.visibility = View.VISIBLE
+
+                if (it.result?.childrenCount!! > 0) {
+                    binding.emptyListLayout.visibility = View.GONE
+                    binding.listItemsParentContainer.visibility = View.VISIBLE
+                } else {
+                    binding.emptyListLayout.visibility = View.VISIBLE
+                    binding.listItemsParentContainer.visibility = View.GONE
+                }
             }
-            // Add check if dataset is = 0 then display some cool text
 
         }.addOnCanceledListener {
             // TODO

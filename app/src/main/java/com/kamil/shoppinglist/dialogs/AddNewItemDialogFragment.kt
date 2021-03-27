@@ -8,13 +8,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.kamil.shoppinglist.ListItemsAdapter
 import com.kamil.shoppinglist.R
 import com.kamil.shoppinglist.databinding.AddNewItemDialogFragmentBinding
-import com.kamil.shoppinglist.databinding.AddNewListDialogFragmentBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
-import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class AddNewItemDialogFragment(
     private var listItemsViewModel: ListItemsViewModel,
@@ -32,11 +28,6 @@ class AddNewItemDialogFragment(
 
     override fun onStart() {
         super.onStart()
-
-//        dialog?.window?.setLayout(
-//            WindowManager.LayoutParams.MATCH_PARENT,
-//            WindowManager.LayoutParams.MATCH_PARENT / 2
-//        )
     }
 
     override fun onCreateView(
@@ -51,14 +42,13 @@ class AddNewItemDialogFragment(
         }
 
         binding.dialogSaveButton.setOnClickListener {
+            val itemName = binding.itemNameInputField.text
 
-            val listName = binding.itemNameInputField.text
-
-            if (listName.isEmpty() || listName.length <= 0) {
-                binding.itemNameInputField.error = resources.getString(R.string.missingFieldNameError);
+            if (itemName.isEmpty() || itemName.length <= 0) {
+                binding.itemNameInputField.error = resources.getString(R.string.missingItemNameError);
                 binding.itemNameInputField.requestFocus();
             } else {
-                listItemsViewModel.addItem(listName.toString())
+                listItemsViewModel.addItem(itemName.toString())
                 listItemsAdapter.adapter?.notifyDataSetChanged()
                 dialog?.hide()
                 dialog?.cancel()

@@ -1,21 +1,16 @@
 package com.kamil.shoppinglist
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.*
-import com.kamil.shoppinglist.AuthFragment.Companion.TAG
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_ID
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.ListContentActivity.Companion.USER_ID
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
-import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListCollectionAdapter(
@@ -56,6 +51,7 @@ class ListCollectionAdapter(
         // Delete list from recycler view
         holder.binding.deleteListButton.setOnClickListener {
             listsCollectionViewModel.deleteItem(position)
+//            notifyDataSetChanged()
             notifyItemRemoved(position)
         }
     }
