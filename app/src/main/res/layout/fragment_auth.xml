@@ -5,7 +5,7 @@
     android:id="@+id/authFragmentMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthFragment">
+    tools:context=".auth.AuthFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

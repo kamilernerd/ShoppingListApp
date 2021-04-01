@@ -21,10 +21,6 @@ class ListItemsAdapter(
 
     private val listId = ListId
 
-    init {
-        progressBar.progress = listItemsViewModel.getAllCheckedItems().count()
-    }
-
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListItem) {
             if (!listId.equals(item.listId)) {
