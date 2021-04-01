@@ -29,6 +29,17 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/listNameTextView"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -73,27 +84,6 @@
         android:translationY="180dp"
         app:layout_anchor="@+id/itemsListContainer"
         app:layout_anchorGravity="top|center" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/emptyListLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/noListsText"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginStart="86dp"
-            android:layout_marginTop="302dp"
-            android:layout_marginEnd="79dp"
-            android:layout_marginBottom="405dp"
-            android:text="@string/emptyListText"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addNewItem"

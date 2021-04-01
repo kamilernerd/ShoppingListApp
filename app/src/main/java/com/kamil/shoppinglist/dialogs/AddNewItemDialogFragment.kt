@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Tasks
+import com.google.android.gms.tasks.Tasks.await
 import com.kamil.shoppinglist.R
 import com.kamil.shoppinglist.databinding.AddNewItemDialogFragmentBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
+import kotlinx.coroutines.CoroutineStart
 
 class AddNewItemDialogFragment(
     private var listItemsViewModel: ListItemsViewModel,
@@ -50,11 +53,11 @@ class AddNewItemDialogFragment(
             } else {
                 listItemsViewModel.addItem(itemName.toString())
                 listItemsAdapter.adapter?.notifyDataSetChanged()
+
                 dialog?.hide()
                 dialog?.cancel()
             }
         }
-
         return binding.root
     }
 

@@ -1,8 +1,6 @@
 package com.kamil.shoppinglist
 
 import android.content.Intent
-import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,6 @@ import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.ListContentActivity.Companion.USER_ID
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
-import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListCollectionAdapter(
@@ -35,7 +32,7 @@ class ListCollectionAdapter(
     override fun getItemCount(): Int = listsCollectionViewModel.getItems().count()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list = listsCollectionViewModel.getItems()[position]
+        val list = listsCollectionViewModel.getItems()[holder.adapterPosition]
         holder.bind(list)
 
         // Open new activity when clicking on a list
@@ -57,8 +54,8 @@ class ListCollectionAdapter(
                 return@setOnClickListener
             }
 
-            listsCollectionViewModel.deleteItem(position)
-            notifyItemRemoved(position)
+            listsCollectionViewModel.deleteItem(holder.adapterPosition)
+            notifyItemRemoved(holder.adapterPosition)
         }
     }
 

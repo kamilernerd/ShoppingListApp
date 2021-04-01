@@ -24,32 +24,20 @@ class ListContentActivity : AppCompatActivity() {
         val position = intent.getStringExtra(LIST_ID).toString()
         val listName = intent.getStringExtra(LIST_NAME).toString()
         val userId = intent.getStringExtra(USER_ID).toString()
-        Log.println(Log.WARN, "HEI:", "OPENED LIST AT POSITION ${position}")
 
         listsItemsViewModel = ListItemsViewModel(position, userId)
-        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position)
+        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar)
 
         binding.listNameTextView.text = listName
         binding.listItems.layoutManager = LinearLayoutManager(this)
         binding.listItems.adapter = listItemsAdapter
 
-        // Show spinner and hide list
         binding.magicSpinner.visibility = View.VISIBLE
-        binding.listItemsParentContainer.visibility = View.GONE
-        binding.emptyListLayout.visibility = View.GONE
 
         listsItemsViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
                 binding.magicSpinner.visibility = View.GONE
-
-                if (it.result?.childrenCount!! > 0) {
-                    binding.emptyListLayout.visibility = View.GONE
-                    binding.listItemsParentContainer.visibility = View.VISIBLE
-                } else {
-                    binding.emptyListLayout.visibility = View.VISIBLE
-                    binding.listItemsParentContainer.visibility = View.GONE
-                }
-
+                binding.progressBar.progress = listsItemsViewModel.getAllCheckedItems().count()
                 listItemsAdapter.notifyDataSetChanged()
             }
         }.addOnCanceledListener {
@@ -64,6 +52,7 @@ class ListContentActivity : AppCompatActivity() {
             ).show(
                 supportFragmentManager, AddNewListDialogFragment.TAG
             )
+            listItemsAdapter.notifyDataSetChanged()
         }
     }
 

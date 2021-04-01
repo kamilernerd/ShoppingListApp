@@ -4,22 +4,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
 import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
+import kotlinx.android.synthetic.main.list_item_layout.view.*
 
 class ListItemsAdapter(
     private val listItemsViewModel: ListItemsViewModel,
-    private val ListId: String
+    private val ListId: String,
+    private val progressBar: ProgressBar
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private val listId = ListId
 
     init {
-        notifyDataSetChanged()
+        progressBar.progress = listItemsViewModel.getAllCheckedItems().count()
     }
 
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
@@ -38,11 +41,19 @@ class ListItemsAdapter(
     override fun getItemCount(): Int = listItemsViewModel.getItems().count()
 
     override fun onBindViewHolder(holder: ViewHolder, itemPosition: Int) {
-        val itemsList = listItemsViewModel.getItems()[itemPosition]
+        val itemsList = listItemsViewModel.getItems()[holder.adapterPosition]
         holder.bind(itemsList)
 
         holder.binding.checkBox.setOnClickListener {
-            listItemsViewModel.checkUncheckItem(itemPosition)
+            listItemsViewModel.checkUncheckItem(holder.adapterPosition)
+
+            progressBar.max = listItemsViewModel.getItems().count()
+
+            if (it?.checkBox?.isChecked == true) {
+                progressBar.progress = progressBar.progress + 1
+            } else {
+                progressBar.progress = progressBar.progress - 1
+            }
         }
 
         holder.binding.deleteListButton.setOnClickListener {
@@ -50,8 +61,8 @@ class ListItemsAdapter(
                 return@setOnClickListener
             }
 
-            listItemsViewModel.deleteItem(itemPosition)
-            notifyItemRemoved(itemPosition)
+            listItemsViewModel.deleteItem(holder.adapterPosition)
+            notifyItemRemoved(holder.adapterPosition)
         }
     }
 
