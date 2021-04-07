@@ -1,17 +1,19 @@
 <resources>
     <string name="app_name">ShoppingList</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="createNewListText">Create new list</string>
+    <string name="createNewItemText">Add new item</string>
     <string name="listNameHint">List name</string>
     <string name="button_add_new_list_aria">Add new list</string>
     <string name="top_bar_text">Shopping lists</string>
     <string name="itemNameHint">Item name</string>
     <string name="listItems">List items</string>
+    <string name="emptyListText">This list seems to be empty.</string>
+    <string name="noListsText">You have not created any lists yet.</string>
     <!-- ERROR MESSAGES -->
     <string name="missingFieldNameError">List name cannot be empty!</string>
+    <string name="missingItemNameError">Item name cannot be empty!</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

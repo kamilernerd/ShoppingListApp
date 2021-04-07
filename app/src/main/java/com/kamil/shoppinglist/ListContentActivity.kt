@@ -1,15 +1,19 @@
 package com.kamil.shoppinglist
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ListContentActivityBinding
+import com.kamil.shoppinglist.dialogs.AddNewItemDialogFragment
+import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 
 class ListContentActivity : AppCompatActivity() {
 
     private lateinit var binding: ListContentActivityBinding
+    private lateinit var listsItemsViewModel: ListItemsViewModel
+    private lateinit var listItemsAdapter: ListItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,16 +22,44 @@ class ListContentActivity : AppCompatActivity() {
 
         val position = intent.getStringExtra(LIST_ID).toString()
         val listName = intent.getStringExtra(LIST_NAME).toString()
-        Log.println(Log.WARN, "HEI:", "OPENED LIST AT POSITION ${position}")
+        val userId = intent.getStringExtra(USER_ID).toString()
+
+        listsItemsViewModel = ListItemsViewModel(position, userId)
+
+        listsItemsViewModel.read().addOnCompleteListener {
+            if (it.isComplete) {
+                binding.magicSpinner.visibility = View.GONE
+                binding.progressBar.progress = listsItemsViewModel.getAllCheckedItems().count()
+                listItemsAdapter.notifyDataSetChanged()
+            }
+        }.addOnCanceledListener {
+            // TODO
+            // Add small text saying that list could not be fetched
+        }
+
+        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar)
 
         binding.listNameTextView.text = listName
         binding.listItems.layoutManager = LinearLayoutManager(this)
-        binding.listItems.adapter = ListItemsAdapter(position)
+        binding.listItems.adapter = listItemsAdapter
+
+        binding.magicSpinner.visibility = View.VISIBLE
+
+        binding.addNewItem.setOnClickListener {
+            AddNewItemDialogFragment(
+                listsItemsViewModel,
+                binding.listItems
+            ).show(
+                supportFragmentManager, AddNewListDialogFragment.TAG
+            )
+            listItemsAdapter.notifyDataSetChanged()
+        }
     }
 
     companion object {
         const val LIST_ID = "id"
         const val LIST_NAME = "name"
+        const val USER_ID = "user_id"
     }
 
 }

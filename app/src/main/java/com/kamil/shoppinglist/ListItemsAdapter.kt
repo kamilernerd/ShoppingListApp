@@ -1,20 +1,20 @@
 package com.kamil.shoppinglist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
-import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
-import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
+import kotlinx.android.synthetic.main.list_item_layout.view.*
 
 class ListItemsAdapter(
-    ListId: String
+    private val listItemsViewModel: ListItemsViewModel,
+    private val ListId: String,
+    private val progressBar: ProgressBar
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
-    private val listItemsViewModel = ListItemsViewModel()
     private val listId = ListId
 
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
@@ -26,21 +26,35 @@ class ListItemsAdapter(
             binding.itemId.text = item.id
             binding.itemName.text = item.itemName
             binding.listId.text = item.listId
+            binding.checkBox.isChecked = item.checked
         }
     }
 
-    override fun getItemCount(): Int = listItemsViewModel.getItems().size
+    override fun getItemCount(): Int = listItemsViewModel.getItems().count()
 
     override fun onBindViewHolder(holder: ViewHolder, itemPosition: Int) {
-        val itemsList = listItemsViewModel.getItems()[itemPosition]
+        val itemsList = listItemsViewModel.getItems()[holder.adapterPosition]
         holder.bind(itemsList)
 
-        holder.binding.deleteListButton.setOnClickListener {
-            Log.println(Log.INFO, "REMOVET AT INDEX ", itemPosition.toString())
-            Log.println(Log.INFO, "REMOVET LIST AT ", listItemsViewModel.getItems()[itemPosition].itemName.toString())
+        holder.binding.checkBox.setOnClickListener {
+            listItemsViewModel.checkUncheckItem(holder.adapterPosition)
 
-            listItemsViewModel.deleteItem(itemPosition, holder)
-            notifyItemRemoved(itemPosition)
+            progressBar.max = listItemsViewModel.getItems().count()
+
+            if (it?.checkBox?.isChecked == true) {
+                progressBar.progress = progressBar.progress + 1
+            } else {
+                progressBar.progress = progressBar.progress - 1
+            }
+        }
+
+        holder.binding.deleteListButton.setOnClickListener {
+            if (holder.adapterPosition <= RecyclerView.NO_POSITION) {
+                return@setOnClickListener
+            }
+
+            listItemsViewModel.deleteItem(holder.adapterPosition)
+            notifyItemRemoved(holder.adapterPosition)
         }
     }
 
@@ -53,12 +67,5 @@ class ListItemsAdapter(
             ),
             listId,
         )
-    }
-
-    public fun updateCollection(newLists: List<ListItem>) {
-        //listItemsViewModel.getItems().clear()
-        //listItemsViewModel.getItems().addAll(newLists)
-        //listItemsViewModel.getItems().
-        //notifyDataSetChanged()
     }
 }

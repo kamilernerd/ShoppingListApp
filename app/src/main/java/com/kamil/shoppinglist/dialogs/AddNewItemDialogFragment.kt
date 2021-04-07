@@ -8,20 +8,22 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Tasks
+import com.google.android.gms.tasks.Tasks.await
 import com.kamil.shoppinglist.R
-import com.kamil.shoppinglist.databinding.AddNewListDialogFragmentBinding
-import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import com.kamil.shoppinglist.databinding.AddNewItemDialogFragmentBinding
+import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
+import kotlinx.coroutines.CoroutineStart
 
-class AddNewListDialogFragment(
-    private var listsCollectionViewModel: ListsCollectionViewModel,
-    private val ListCollectionAdapter: RecyclerView
+class AddNewItemDialogFragment(
+    private var listItemsViewModel: ListItemsViewModel,
+    private val ListItemsAdapter: RecyclerView
 ) : DialogFragment() {
 
-    private var _binding: AddNewListDialogFragmentBinding? = null
+    private var _binding: AddNewItemDialogFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private var listCollectionAdapter = ListCollectionAdapter
+    private var listItemsAdapter = ListItemsAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState)
@@ -36,28 +38,26 @@ class AddNewListDialogFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AddNewListDialogFragmentBinding.inflate(layoutInflater)
+        _binding = AddNewItemDialogFragmentBinding.inflate(layoutInflater)
 
         binding.dialogCancelButton.setOnClickListener {
             dialog?.dismiss()
         }
 
         binding.dialogSaveButton.setOnClickListener {
+            val itemName = binding.itemNameInputField.text
 
-            val listName = binding.listNameInputField.text
-
-            if (listName.isEmpty() || listName.length <= 0) {
-                binding.listNameInputField.error = resources.getString(R.string.missingFieldNameError);
-                binding.listNameInputField.requestFocus();
+            if (itemName.isEmpty() || itemName.length <= 0) {
+                binding.itemNameInputField.error = resources.getString(R.string.missingItemNameError);
+                binding.itemNameInputField.requestFocus();
             } else {
-                listsCollectionViewModel.addList(listName.toString())
+                listItemsViewModel.addItem(itemName.toString())
+                listItemsAdapter.adapter?.notifyDataSetChanged()
+
                 dialog?.hide()
                 dialog?.cancel()
             }
-
-            listCollectionAdapter.adapter?.notifyDataSetChanged()
         }
-
         return binding.root
     }
 

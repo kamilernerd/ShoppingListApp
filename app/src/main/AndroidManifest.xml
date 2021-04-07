@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kamil.shoppinglist">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,7 @@
         android:theme="@style/Theme.ShoppingList">
         <activity android:name=".MainActivity" />
         <activity android:name=".ListContentActivity" />
-        <activity android:name=".AuthFragment">
+        <activity android:name=".auth.AuthFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

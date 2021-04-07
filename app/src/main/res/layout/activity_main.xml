@@ -12,21 +12,27 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="174dp"
-        android:background="@color/app_background">
+        android:background="@color/app_background"
+        android:defaultFocusHighlightEnabled="false"
+        app:elevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:elevation="0dp">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="99dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="98dp"
+                android:layout_marginBottom="65dp"
                 android:text="@string/top_bar_text"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -66,6 +72,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/magicSpinner"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:translationY="180dp"
+        android:translationZ="0dp"
+        app:layout_anchor="@+id/listsContainer"
+        app:layout_anchorGravity="center_horizontal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewButton"
