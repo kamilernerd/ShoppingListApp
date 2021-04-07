@@ -4,79 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:backgroundTint="@color/purple_500"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="5dp"
+    android:backgroundTint="@color/white"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="30dp"
+    app:cardCornerRadius="5dp"
     app:contentPadding="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="29dp">
 
         <ImageButton
             android:id="@+id/deleteListButton"
             android:layout_width="33dp"
-            android:layout_height="28dp"
+            android:layout_height="29dp"
+            android:background="@color/white"
             android:contentDescription="Delete list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.996"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
-
-        <TextView
-            android:id="@+id/itemId"
-            android:layout_width="54dp"
-            android:layout_height="19dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="List id" />
-
-        <TextView
-            android:id="@+id/listId"
-            android:layout_width="54dp"
-            android:layout_height="19dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.242"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="List id" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/baseline_delete_24" />
 
         <TextView
             android:id="@+id/itemName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/itemId"
+            android:layout_width="208dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="9dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/deleteListButton"
-            app:layout_constraintHorizontal_bias="0.052"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125"
+            app:layout_constraintVertical_bias="0.444"
             tools:text="@string/itemNameHint" />
 
         <CheckBox
             android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="116dp"
-            android:layout_marginEnd="1dp"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+            android:layout_width="32dp"
+            android:layout_height="29dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/deleteListButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:useMaterialThemeColors="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

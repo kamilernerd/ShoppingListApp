@@ -2,14 +2,10 @@ package com.kamil.shoppinglist.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
-import com.kamil.shoppinglist.ListItemsAdapter
 import com.kamil.shoppinglist.data.ListItem
-import java.util.concurrent.TimeUnit
 
 class ListItemsViewModel(
     private val listId: String,

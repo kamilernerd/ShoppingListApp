@@ -1,4 +1,4 @@
-package com.kamil.shoppinglist
+package com.kamil.shoppinglist.lists
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,9 +23,7 @@ class ListItemsAdapter(
                 return
             }
 
-            binding.itemId.text = item.id
             binding.itemName.text = item.itemName
-            binding.listId.text = item.listId
             binding.checkBox.isChecked = item.checked
         }
     }

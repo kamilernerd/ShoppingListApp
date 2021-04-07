@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseUser
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.lists.ListCollectionAdapter
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.listCollection.layoutManager = LinearLayoutManager(this)
         binding.listCollection.adapter = listCollectionAdapter
-
         binding.magicSpinner.visibility = View.VISIBLE
 
         listsCollectionViewModel.read().addOnCompleteListener {
@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity() {
                 binding.magicSpinner.visibility = View.GONE
                 listCollectionAdapter.notifyDataSetChanged()
             }
-        }.addOnCanceledListener {
-            // TODO
-            // Add small text saying that list could not be fetched
         }
 
         binding.addNewButton.setOnClickListener {

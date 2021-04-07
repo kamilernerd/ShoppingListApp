@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="174dp"
+        android:layout_height="133dp"
         android:background="@color/app_background"
         android:defaultFocusHighlightEnabled="false"
         app:elevation="0dp">
@@ -25,16 +25,18 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="99dp"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="98dp"
-                android:layout_marginBottom="65dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="172dp"
+                android:layout_marginBottom="62dp"
                 android:text="@string/top_bar_text"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -51,24 +53,19 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listCollection"
-                android:layout_width="381dp"
-                android:layout_height="518dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="60dp"
-                android:scrollIndicators="top|bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="ifContentScrolls"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toTopOf="parent">
 
             </androidx.recyclerview.widget.RecyclerView>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
@@ -91,6 +88,8 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/button_add_new_list_aria"
-        android:src="@android:drawable/ic_input_add" />
+        android:src="@android:drawable/ic_input_add"
+        app:layout_anchor="@+id/appbar"
+        app:layout_anchorGravity="end|center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

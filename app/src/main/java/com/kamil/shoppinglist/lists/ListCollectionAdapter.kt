@@ -1,11 +1,13 @@
-package com.kamil.shoppinglist
+package com.kamil.shoppinglist.lists
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.kamil.shoppinglist.ListContentActivity
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_ID
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_NAME
 import com.kamil.shoppinglist.ListContentActivity.Companion.USER_ID
@@ -17,14 +19,9 @@ class ListCollectionAdapter(
     private val listsCollectionViewModel: ListsCollectionViewModel
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
-    init {
-//        notifyDataSetChanged()
-    }
-
     // Map list name to list item in the view
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(list: ListData) {
-            binding.listId.text = list.id
             binding.listName.text = list.listName
         }
     }

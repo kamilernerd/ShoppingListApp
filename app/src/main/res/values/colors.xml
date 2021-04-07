@@ -7,5 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="app_background">#EDEDED</color>
+    <color name="coolOrange">#ff971d</color>
+    <color name="fadedOrange">#ffe8d6</color>
+    <color name="fadedPink">#f9f6f7</color>
 </resources>
