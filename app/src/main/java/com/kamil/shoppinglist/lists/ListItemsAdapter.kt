@@ -23,9 +23,7 @@ class ListItemsAdapter(
                 return
             }
 
-            binding.itemId.text = item.id
             binding.itemName.text = item.itemName
-            binding.listId.text = item.listId
             binding.checkBox.isChecked = item.checked
         }
     }
