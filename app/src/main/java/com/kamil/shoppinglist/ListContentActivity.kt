@@ -33,9 +33,6 @@ class ListContentActivity : AppCompatActivity() {
                 binding.progressBar.progress = listsItemsViewModel.getAllCheckedItems().count()
                 listItemsAdapter.notifyDataSetChanged()
             }
-        }.addOnCanceledListener {
-            // TODO
-            // Add small text saying that list could not be fetched
         }
 
         listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar)
