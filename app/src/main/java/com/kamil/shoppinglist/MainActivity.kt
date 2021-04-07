@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseUser
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.lists.ListCollectionAdapter
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class MainActivity : AppCompatActivity() {

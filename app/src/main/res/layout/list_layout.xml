@@ -8,6 +8,7 @@
     android:backgroundTint="@color/purple_500"
     android:clickable="true"
     android:focusable="true"
+    android:outlineAmbientShadowColor="#35C140"
     app:cardCornerRadius="30dp"
     app:contentPadding="24dp">
 
@@ -28,30 +29,16 @@
             app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <TextView
-            android:id="@+id/listId"
-            android:layout_width="54dp"
-            android:layout_height="19dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="List id" />
-
-        <TextView
             android:id="@+id/listName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="227dp"
+            android:layout_height="19dp"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/listId"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/deleteListButton"
-            app:layout_constraintHorizontal_bias="0.052"
+            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125"
+            app:layout_constraintVertical_bias="0.6"
             tools:text="@string/listNameHint" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ListContentActivityBinding
 import com.kamil.shoppinglist.dialogs.AddNewItemDialogFragment
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.lists.ListItemsAdapter
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 
 class ListContentActivity : AppCompatActivity() {
