@@ -8,6 +8,15 @@
     android:background="@color/app_background"
     android:scrollbars="vertical">
 
+    <TextView
+        android:id="@+id/missingLists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/noListsText"
+        android:textColor="@color/coolOrange"
+        app:layout_anchor="@+id/magicSpinner"
+        app:layout_anchorGravity="center" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"

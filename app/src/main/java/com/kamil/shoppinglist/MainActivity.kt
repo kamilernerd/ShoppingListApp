@@ -30,17 +30,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.listCollection.layoutManager = LinearLayoutManager(this)
         binding.listCollection.adapter = listCollectionAdapter
-
+        binding.missingLists.visibility = View.GONE
         binding.magicSpinner.visibility = View.VISIBLE
 
         listsCollectionViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
+                if (it.result?.children?.count()!! <= 0) {
+                    binding.missingLists.visibility = View.VISIBLE
+                }
                 binding.magicSpinner.visibility = View.GONE
                 listCollectionAdapter.notifyDataSetChanged()
             }
         }.addOnCanceledListener {
-            // TODO
-            // Add small text saying that list could not be fetched
+            binding.missingLists.text = resources.getString(R.string.list_loading_failed)
+            binding.missingLists.visibility = View.VISIBLE
         }
 
         binding.addNewButton.setOnClickListener {
