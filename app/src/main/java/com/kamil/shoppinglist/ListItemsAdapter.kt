@@ -1,15 +1,11 @@
 package com.kamil.shoppinglist
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
-import com.kamil.shoppinglist.data.ListData
 import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
-import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 import kotlinx.android.synthetic.main.list_item_layout.view.*
 

@@ -1,7 +1,6 @@
 package com.kamil.shoppinglist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,13 +25,6 @@ class ListContentActivity : AppCompatActivity() {
         val userId = intent.getStringExtra(USER_ID).toString()
 
         listsItemsViewModel = ListItemsViewModel(position, userId)
-        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar)
-
-        binding.listNameTextView.text = listName
-        binding.listItems.layoutManager = LinearLayoutManager(this)
-        binding.listItems.adapter = listItemsAdapter
-
-        binding.magicSpinner.visibility = View.VISIBLE
 
         listsItemsViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
@@ -44,6 +36,14 @@ class ListContentActivity : AppCompatActivity() {
             // TODO
             // Add small text saying that list could not be fetched
         }
+
+        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar)
+
+        binding.listNameTextView.text = listName
+        binding.listItems.layoutManager = LinearLayoutManager(this)
+        binding.listItems.adapter = listItemsAdapter
+
+        binding.magicSpinner.visibility = View.VISIBLE
 
         binding.addNewItem.setOnClickListener {
             AddNewItemDialogFragment(
