@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.*
 import com.kamil.shoppinglist.data.ListData
+import com.kamil.shoppinglist.data.ListItem
 
 class ListsCollectionViewModel(
     private val userId: String

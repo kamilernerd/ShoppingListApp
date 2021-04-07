@@ -18,10 +18,6 @@ class ListCollectionAdapter(
     private val listsCollectionViewModel: ListsCollectionViewModel
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
-    init {
-//        notifyDataSetChanged()
-    }
-
     // Map list name to list item in the view
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(list: ListData) {
