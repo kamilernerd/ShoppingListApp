@@ -10,22 +10,23 @@
     android:layout_marginBottom="5dp"
     android:background="@color/white"
     android:backgroundTint="@color/white"
-    android:clickable="true"
     android:fadingEdgeLength="0dp"
     android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
     app:cardCornerRadius="5dp"
     app:contentPadding="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="37dp">
 
         <ImageButton
             android:id="@+id/deleteListButton"
-            android:layout_width="33dp"
-            android:layout_height="28dp"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
             android:layout_marginEnd="4dp"
-            android:background="@color/white"
+            android:background="@drawable/round_corners"
             android:contentDescription="@string/delete_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
