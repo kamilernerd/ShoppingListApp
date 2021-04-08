@@ -24,7 +24,7 @@
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:background="@drawable/round_corners"
-            android:contentDescription="Delete list"
+            android:contentDescription="@string/delete_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.996"
