@@ -30,6 +30,7 @@ class ListContentActivity : AppCompatActivity() {
         listsItemsViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
                 binding.magicSpinner.visibility = View.GONE
+                binding.progressBar.max = listsItemsViewModel.getItems().count()
                 binding.progressBar.progress = listsItemsViewModel.getAllCheckedItems().count()
                 listItemsAdapter.notifyDataSetChanged()
             }
