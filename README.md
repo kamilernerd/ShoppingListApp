@@ -15,4 +15,8 @@
     - Fullfør checkbox ved liste elementet
     - Opprydding i databasen (Når en liste slettes blir også elementene i lista slettet)
 
+  ### Test brukere
+    - joe@doe.com 123456
+    - test@test.com 123456
+
 ![alt text](https://i.kym-cdn.com/entries/icons/mobile/000/028/021/work.jpg)
