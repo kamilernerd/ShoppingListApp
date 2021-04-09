@@ -16,7 +16,6 @@ class EditListItemDialog(
     private var listItemsViewModel: ListItemsViewModel,
     private var listId: String,
     private val listItemsAdapter: ListItemsAdapter,
-    private val itemCurrentValue: String
 ) : DialogFragment() {
 
     private var _binding: EditListItemDialogFragmentBinding? = null
@@ -36,8 +35,6 @@ class EditListItemDialog(
         savedInstanceState: Bundle?
     ): View {
         _binding = EditListItemDialogFragmentBinding.inflate(layoutInflater)
-
-        binding.itemNameInputField.setText(itemCurrentValue)
 
         binding.dialogCancelButton.setOnClickListener {
             dialog?.dismiss()

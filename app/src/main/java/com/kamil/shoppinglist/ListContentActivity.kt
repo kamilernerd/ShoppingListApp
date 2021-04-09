@@ -56,8 +56,8 @@ class ListContentActivity : AppCompatActivity() {
         }
     }
 
-    fun openEditItemFragment(listItemId: String, listId: String, itemCurrentValue: String) {
-        EditListItemDialog(listItemId, listsItemsViewModel, listId, listItemsAdapter, itemCurrentValue).show(
+    fun openEditItemFragment(listItemId: String, listId: String) {
+        EditListItemDialog(listItemId, listsItemsViewModel, listId, listItemsAdapter).show(
             supportFragmentManager, EditListItemDialog.TAG
         )
     }

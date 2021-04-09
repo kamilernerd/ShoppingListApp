@@ -18,7 +18,7 @@ class ListItemsAdapter(
     private val listItemsViewModel: ListItemsViewModel,
     private val ListId: String,
     private val progressBar: ProgressBar,
-    private val openEditItemDialog: (id: String, listId: String, itemCurrentValue: String) -> Unit
+    private val openEditItemDialog: (id: String, listId: String) -> Unit
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private val listId = ListId
@@ -26,9 +26,8 @@ class ListItemsAdapter(
 
     private class ItemGestureListener(
         private val holder: ViewHolder,
-        private val openEditItemDialog: (id: String, listId: String, itemCurrentValue: String) -> Unit,
+        private val openEditItemDialog: (id: String, listId: String) -> Unit,
         private val listId: String,
-        private val itemCurrentValue: String
     ) : GestureDetector.SimpleOnGestureListener() {
 
         override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
@@ -39,7 +38,8 @@ class ListItemsAdapter(
 
         override fun onDoubleTap(e: MotionEvent?): Boolean {
             super.onDoubleTap(e)
-            openEditItemDialog(holder.adapterPosition.toString(), listId, itemCurrentValue)
+
+            openEditItemDialog(holder.adapterPosition.toString(), listId)
             return true
         }
     }
@@ -64,7 +64,10 @@ class ListItemsAdapter(
 
         mDetector = GestureDetectorCompat(
             holder.itemView.context,
-            ItemGestureListener(holder, openEditItemDialog, listId, holder.binding.itemName.text.toString()
+            ItemGestureListener(
+                holder,
+                openEditItemDialog,
+                listId
         ))
 
         holder.binding.listItemCard.setOnTouchListener(OnTouchListener { v, event ->
