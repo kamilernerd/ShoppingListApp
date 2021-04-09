@@ -35,6 +35,8 @@ class EditListDialog(
     ): View {
         _binding = EditListDialogFragmentBinding.inflate(layoutInflater)
 
+        getDialog()?.getWindow()?.setBackgroundDrawableResource(R.drawable.dialog_rounded_bg);
+
         binding.dialogCancelButton.setOnClickListener {
             dialog?.dismiss()
         }

@@ -38,6 +38,8 @@ class AddNewListDialogFragment(
     ): View {
         _binding = AddNewListDialogFragmentBinding.inflate(layoutInflater)
 
+        getDialog()?.getWindow()?.setBackgroundDrawableResource(R.drawable.dialog_rounded_bg);
+
         binding.dialogCancelButton.setOnClickListener {
             dialog?.dismiss()
         }

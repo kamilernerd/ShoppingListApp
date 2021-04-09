@@ -3,51 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialogBody"
-    android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:layout_gravity="center_vertical"
-    tools:layout_editor_absoluteY="246dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_rounded_bg"
+    android:maxHeight="260dp"
+    android:minWidth="260dp"
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <TextView
         android:id="@+id/createNewListText"
-        android:layout_width="409dp"
-        android:layout_height="45dp"
         android:text="@string/createNewListText"
+        android:layout_width="230dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="670dp"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/dialogSaveButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="105dp"
+        android:layout_width="100dp"
         android:layout_height="45dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/save"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:rippleColor="@android:color/holo_green_light"
-        app:strokeColor="@android:color/holo_green_dark"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="178dp" />
+        app:strokeColor="@android:color/holo_green_dark" />
 
     <Button
         android:id="@+id/dialogCancelButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="105dp"
+        android:layout_width="100dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/cancel"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.283"
         app:rippleColor="@android:color/holo_red_light"
-        app:strokeColor="@android:color/holo_red_dark"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="178dp" />
+        app:strokeColor="@android:color/holo_red_dark" />
 
     <EditText
         android:id="@+id/listNameInputField"
         android:layout_width="230dp"
         android:layout_height="45dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginBottom="570dp"
         android:ems="10"
         android:hint="@string/listNameHint"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 </androidx.constraintlayout.widget.ConstraintLayout>
