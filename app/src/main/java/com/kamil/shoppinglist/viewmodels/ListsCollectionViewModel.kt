@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.*
 import com.kamil.shoppinglist.data.ListData
-import com.kamil.shoppinglist.data.ListItem
 
 class ListsCollectionViewModel(
     private val userId: String
@@ -25,8 +24,14 @@ class ListsCollectionViewModel(
 
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
             Log.println(Log.WARN, "ADD ITEM", "ok")
-        }.addOnCanceledListener {
-            // Handle in case we can't add list
+        }
+    }
+
+    fun updateList(title: String, listId: String) {
+        listsCollection[listId.toInt()].listName = title
+
+        database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
+            Log.println(Log.WARN, "ADD ITEM", "ok")
         }
     }
 
@@ -39,11 +44,7 @@ class ListsCollectionViewModel(
         database.child(DATABASE_PATH).child(userId).setValue(listsCollection).addOnSuccessListener {
             database.child(ListItemsViewModel.DATABASE_PATH).child(userId).child(index.toString()).setValue(null).addOnCompleteListener {
                 Log.println(Log.WARN, "REMOVED", "REMOVED ALL CONNECTED ITEMS")
-            }.addOnCanceledListener {
-                // Handle in case we can't delete list items
             }
-        }.addOnCanceledListener {
-            // Handle in case we can't delete list
         }
     }
 

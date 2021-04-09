@@ -11,7 +11,7 @@
         android:id="@+id/editListText"
         android:layout_width="230dp"
         android:layout_height="45dp"
-        android:text="@string/createNewItemText"
+        android:text="@string/editListText"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,20 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.082" />
-
-    <Button
-        android:id="@+id/dialogSaveButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="105dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/save"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@android:color/holo_green_light"
-        app:strokeColor="@android:color/holo_green_dark" />
 
     <Button
         android:id="@+id/dialogCancelButton"
@@ -50,15 +36,28 @@
         app:rippleColor="@android:color/holo_red_light"
         app:strokeColor="@android:color/holo_red_dark" />
 
+    <Button
+        android:id="@+id/dialogSaveButton"
+        android:layout_width="105dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/coolOrange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <EditText
         android:id="@+id/listNameInputField"
         android:layout_width="230dp"
         android:layout_height="45dp"
         android:layout_marginTop="37dp"
         android:ems="10"
-        android:hint="@string/itemNameHint"
+        android:hint="@string/listNameHint"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/dialogCancelButton"
         app:layout_constraintTop_toBottomOf="@+id/editListText"
         tools:layout_editor_absoluteX="93dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

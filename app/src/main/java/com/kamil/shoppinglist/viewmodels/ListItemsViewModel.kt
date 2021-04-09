@@ -31,6 +31,16 @@ class ListItemsViewModel(
         }
     }
 
+    fun updateItem(itemId: String, newValue: String, listId: String) {
+        listItems[itemId.toInt()].itemName = newValue
+
+        database.child(DATABASE_PATH).child(userId).child(listId).setValue(listItems).addOnSuccessListener {
+            Log.println(Log.WARN, "UPDATE ITEM", "ok")
+        }.addOnCanceledListener {
+            Log.println(Log.WARN, "UPDATE ITEM", "not ok")
+        }
+    }
+
     fun deleteItem(index: Int) {
         if (listItems.isEmpty()) {
             return

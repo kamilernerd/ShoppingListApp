@@ -1,18 +1,23 @@
 package com.kamil.shoppinglist.lists
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.view.*
 import android.widget.ProgressBar
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 import kotlinx.android.synthetic.main.list_item_layout.view.*
 
+
 class ListItemsAdapter(
     private val listItemsViewModel: ListItemsViewModel,
     private val ListId: String,
-    private val progressBar: ProgressBar
+    private val progressBar: ProgressBar,
+    private val openEditItemDialog: (id: String, listId: String) -> Unit
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private val listId = ListId
@@ -33,6 +38,21 @@ class ListItemsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, itemPosition: Int) {
         val itemsList = listItemsViewModel.getItems()[holder.adapterPosition]
         holder.bind(itemsList)
+
+        holder.binding.listItemCard.setOnLongClickListener {
+            val vibrator = getSystemService(holder.itemView.context, Vibrator::class.java)
+            vibrator?.let {
+                if (Build.VERSION.SDK_INT >= 26) {
+                    it.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    @Suppress("DEPRECATION")
+                    it.vibrate(100)
+                }
+            }
+
+            openEditItemDialog(holder.adapterPosition.toString(), listId)
+            return@setOnLongClickListener true
+        }
 
         holder.binding.checkBox.setOnClickListener {
             listItemsViewModel.checkUncheckItem(holder.adapterPosition)
@@ -57,6 +77,7 @@ class ListItemsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return ViewHolder(
             ListItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),

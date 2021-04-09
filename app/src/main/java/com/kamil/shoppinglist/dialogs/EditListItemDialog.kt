@@ -5,25 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.Tasks
-import com.google.android.gms.tasks.Tasks.await
 import com.kamil.shoppinglist.R
-import com.kamil.shoppinglist.databinding.AddNewItemDialogFragmentBinding
+import com.kamil.shoppinglist.databinding.EditListItemDialogFragmentBinding
+import com.kamil.shoppinglist.lists.ListItemsAdapter
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
-import kotlinx.coroutines.CoroutineStart
 
-class AddNewItemDialogFragment(
+class EditListItemDialog(
+    private val itemId: String,
     private var listItemsViewModel: ListItemsViewModel,
-    private val ListItemsAdapter: RecyclerView
+    private var listId: String,
+    private val listItemsAdapter: ListItemsAdapter,
 ) : DialogFragment() {
 
-    private var _binding: AddNewItemDialogFragmentBinding? = null
+    private var _binding: EditListItemDialogFragmentBinding? = null
     private val binding get() = _binding!!
-
-    private var listItemsAdapter = ListItemsAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState)
@@ -38,21 +34,21 @@ class AddNewItemDialogFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AddNewItemDialogFragmentBinding.inflate(layoutInflater)
+        _binding = EditListItemDialogFragmentBinding.inflate(layoutInflater)
 
         binding.dialogCancelButton.setOnClickListener {
             dialog?.dismiss()
         }
 
         binding.dialogSaveButton.setOnClickListener {
-            val itemName = binding.listNameInputField.text
+            val itemName = binding.itemNameInputField.text
 
             if (itemName.isEmpty() || itemName.length <= 0) {
-                binding.listNameInputField.error = resources.getString(R.string.missingItemNameError);
-                binding.listNameInputField.requestFocus();
+                binding.itemNameInputField.error = resources.getString(R.string.missingItemNameError);
+                binding.itemNameInputField.requestFocus();
             } else {
-                listItemsViewModel.addItem(itemName.toString())
-                listItemsAdapter.adapter?.notifyDataSetChanged()
+                listItemsViewModel.updateItem(itemId, itemName.toString(), listId)
+                listItemsAdapter.notifyDataSetChanged()
 
                 dialog?.hide()
                 dialog?.cancel()
@@ -62,7 +58,7 @@ class AddNewItemDialogFragment(
     }
 
     companion object {
-        const val TAG = "AddNewListDialogFragment"
+        const val TAG = "EditListItemDialog"
     }
 
 }

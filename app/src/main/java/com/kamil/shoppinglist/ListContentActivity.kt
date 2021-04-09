@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ListContentActivityBinding
 import com.kamil.shoppinglist.dialogs.AddNewItemDialogFragment
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.dialogs.EditListItemDialog
 import com.kamil.shoppinglist.lists.ListItemsAdapter
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 
@@ -36,7 +37,7 @@ class ListContentActivity : AppCompatActivity() {
             }
         }
 
-        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar)
+        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar, this::openEditItemFragment)
 
         binding.listNameTextView.text = listName
         binding.listItems.layoutManager = LinearLayoutManager(this)
@@ -53,6 +54,12 @@ class ListContentActivity : AppCompatActivity() {
             )
             listItemsAdapter.notifyDataSetChanged()
         }
+    }
+
+    fun openEditItemFragment(listItemId: String, listId: String) {
+        EditListItemDialog(listItemId, listsItemsViewModel, listId, listItemsAdapter).show(
+            supportFragmentManager, EditListItemDialog.TAG
+        )
     }
 
     companion object {
