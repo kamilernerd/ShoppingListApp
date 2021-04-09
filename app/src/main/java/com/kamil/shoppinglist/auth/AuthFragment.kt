@@ -29,8 +29,7 @@ class AuthFragment : AppCompatActivity() {
             val email = binding.editTextTextEmailAddress.text.toString()
             val password = binding.editTextTextPassword.text.toString()
 
-            auth.signInWithEmailAndPassword("kamil.oracz98@gmail.com", "123456")
-//            auth.signInWithEmailAndPassword(email, password)
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
