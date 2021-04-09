@@ -11,7 +11,7 @@
         android:id="@+id/editListText"
         android:layout_width="230dp"
         android:layout_height="45dp"
-        android:text="@string/editItemText"
+        android:text="@string/editListText"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,12 +49,12 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/itemNameInputField"
+        android:id="@+id/listNameInputField"
         android:layout_width="230dp"
         android:layout_height="45dp"
         android:layout_marginTop="37dp"
         android:ems="10"
-        android:hint="@string/itemNameHint"
+        android:hint="@string/listNameHint"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/dialogCancelButton"
         app:layout_constraintTop_toBottomOf="@+id/editListText"

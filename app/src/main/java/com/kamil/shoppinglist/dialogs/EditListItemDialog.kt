@@ -58,7 +58,7 @@ class EditListItemDialog(
     }
 
     companion object {
-        const val TAG = "AddNewListDialogFragment"
+        const val TAG = "EditListItemDialog"
     }
 
 }

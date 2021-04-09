@@ -12,6 +12,7 @@
     <string name="emptyListText">This list seems to be empty.</string>
     <string name="noListsText">You have not created any lists yet.</string>
     <string name="editItemText">Edit item</string>
+    <string name="editListText">Edit list name</string>
     <!-- ERROR MESSAGES -->
     <string name="missingFieldNameError">List name cannot be empty!</string>
     <string name="missingItemNameError">Item name cannot be empty!</string>

@@ -1,11 +1,14 @@
 package com.kamil.shoppinglist.lists
 
 import android.content.Intent
-import android.util.Log
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.ListContentActivity
 import com.kamil.shoppinglist.ListContentActivity.Companion.LIST_ID
@@ -16,10 +19,10 @@ import com.kamil.shoppinglist.databinding.ListLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
 class ListCollectionAdapter(
-    private val listsCollectionViewModel: ListsCollectionViewModel
+    private val listsCollectionViewModel: ListsCollectionViewModel,
+    private val openEditListFragment: (listId: String) -> Unit
 ): RecyclerView.Adapter<ListCollectionAdapter.ViewHolder>() {
 
-    // Map list name to list item in the view
     class ViewHolder(val binding: ListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(list: ListData) {
             binding.listName.text = list.listName
@@ -31,6 +34,21 @@ class ListCollectionAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = listsCollectionViewModel.getItems()[holder.adapterPosition]
         holder.bind(list)
+
+        holder.itemView.setOnLongClickListener {
+            val vibrator =
+                ContextCompat.getSystemService(holder.itemView.context, Vibrator::class.java)
+            vibrator?.let {
+                if (Build.VERSION.SDK_INT >= 26) {
+                    it.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    @Suppress("DEPRECATION")
+                    it.vibrate(100)
+                }
+            }
+            openEditListFragment(holder.adapterPosition.toString())
+            return@setOnLongClickListener true
+        }
 
         // Open new activity when clicking on a list
         holder.itemView.setOnClickListener(object: View.OnClickListener {

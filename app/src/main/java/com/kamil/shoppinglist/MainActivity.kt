@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseUser
 import com.kamil.shoppinglist.databinding.ActivityMainBinding
 import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
+import com.kamil.shoppinglist.dialogs.EditListDialog
+import com.kamil.shoppinglist.dialogs.EditListItemDialog
 import com.kamil.shoppinglist.lists.ListCollectionAdapter
 import com.kamil.shoppinglist.viewmodels.ListsCollectionViewModel
 
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val user = intent.getParcelableExtra<FirebaseUser>("USER")
 
         listsCollectionViewModel = ListsCollectionViewModel(user?.uid.toString())
-        listCollectionAdapter = ListCollectionAdapter(listsCollectionViewModel)
+        listCollectionAdapter = ListCollectionAdapter(listsCollectionViewModel, this::openEditListFragment)
 
         binding.listCollection.layoutManager = LinearLayoutManager(this)
         binding.listCollection.adapter = listCollectionAdapter
@@ -48,5 +50,11 @@ class MainActivity : AppCompatActivity() {
             )
             listCollectionAdapter.notifyDataSetChanged()
         }
+    }
+
+    fun openEditListFragment(listId: String) {
+        EditListDialog(listId, listsCollectionViewModel, listCollectionAdapter).show(
+            supportFragmentManager, EditListDialog.TAG
+        )
     }
 }
