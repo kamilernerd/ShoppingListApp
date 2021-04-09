@@ -62,7 +62,7 @@ class AddNewItemDialogFragment(
     }
 
     companion object {
-        const val TAG = "AddNewListDialogFragment"
+        const val TAG = "AddNewItemDialogFragment"
     }
 
 }

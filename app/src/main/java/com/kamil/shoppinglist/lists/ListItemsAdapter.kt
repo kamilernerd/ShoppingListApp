@@ -73,6 +73,7 @@ class ListItemsAdapter(
 
             listItemsViewModel.deleteItem(holder.adapterPosition)
             notifyItemRemoved(holder.adapterPosition)
+            progressBar.max = listItemsViewModel.getItems().count()
         }
     }
 

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.shoppinglist.databinding.ListContentActivityBinding
 import com.kamil.shoppinglist.dialogs.AddNewItemDialogFragment
-import com.kamil.shoppinglist.dialogs.AddNewListDialogFragment
 import com.kamil.shoppinglist.dialogs.EditListItemDialog
 import com.kamil.shoppinglist.lists.ListItemsAdapter
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
@@ -50,9 +49,11 @@ class ListContentActivity : AppCompatActivity() {
                 listsItemsViewModel,
                 binding.listItems
             ).show(
-                supportFragmentManager, AddNewListDialogFragment.TAG
+                supportFragmentManager, AddNewItemDialogFragment.TAG
             )
             listItemsAdapter.notifyDataSetChanged()
+            binding.progressBar.max = listsItemsViewModel.getItems().count()
+            binding.progressBar.progress = listsItemsViewModel.getAllCheckedItems().count()
         }
     }
 
