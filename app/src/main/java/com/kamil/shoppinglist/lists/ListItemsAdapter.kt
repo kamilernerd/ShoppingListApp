@@ -1,12 +1,11 @@
 package com.kamil.shoppinglist.lists
 
-import android.R
-import android.util.Log
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.*
-import android.view.View.OnTouchListener
 import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.core.view.GestureDetectorCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
@@ -22,28 +21,6 @@ class ListItemsAdapter(
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private val listId = ListId
-    private lateinit var mDetector: GestureDetectorCompat
-
-    private class ItemGestureListener(
-        private val holder: ViewHolder,
-        private val openEditItemDialog: (id: String, listId: String) -> Unit,
-        private val listId: String,
-    ) : GestureDetector.SimpleOnGestureListener() {
-
-        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-            super.onSingleTapConfirmed(e)
-            Toast.makeText(holder.itemView.context, "Double tap to edit", Toast.LENGTH_SHORT).show()
-            return true
-        }
-
-        override fun onDoubleTap(e: MotionEvent?): Boolean {
-            super.onDoubleTap(e)
-
-            openEditItemDialog(holder.adapterPosition.toString(), listId)
-            return true
-        }
-    }
-
 
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListItem) {
@@ -62,17 +39,20 @@ class ListItemsAdapter(
         val itemsList = listItemsViewModel.getItems()[holder.adapterPosition]
         holder.bind(itemsList)
 
-        mDetector = GestureDetectorCompat(
-            holder.itemView.context,
-            ItemGestureListener(
-                holder,
-                openEditItemDialog,
-                listId
-        ))
+        holder.binding.listItemCard.setOnLongClickListener {
+            val vibrator = getSystemService(holder.itemView.context, Vibrator::class.java)
+            vibrator?.let {
+                if (Build.VERSION.SDK_INT >= 26) {
+                    it.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    @Suppress("DEPRECATION")
+                    it.vibrate(100)
+                }
+            }
 
-        holder.binding.listItemCard.setOnTouchListener(OnTouchListener { v, event ->
-            mDetector.onTouchEvent(event)
-        })
+            openEditItemDialog(holder.adapterPosition.toString(), listId)
+            return@setOnLongClickListener true
+        }
 
         holder.binding.checkBox.setOnClickListener {
             listItemsViewModel.checkUncheckItem(holder.adapterPosition)
