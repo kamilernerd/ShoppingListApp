@@ -1,21 +1,49 @@
 package com.kamil.shoppinglist.lists
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.R
+import android.util.Log
+import android.view.*
+import android.view.View.OnTouchListener
 import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.core.view.GestureDetectorCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kamil.shoppinglist.data.ListItem
 import com.kamil.shoppinglist.databinding.ListItemLayoutBinding
 import com.kamil.shoppinglist.viewmodels.ListItemsViewModel
 import kotlinx.android.synthetic.main.list_item_layout.view.*
 
+
 class ListItemsAdapter(
     private val listItemsViewModel: ListItemsViewModel,
     private val ListId: String,
-    private val progressBar: ProgressBar
+    private val progressBar: ProgressBar,
+    private val openEditItemDialog: (id: String, listId: String, itemCurrentValue: String) -> Unit
 ): RecyclerView.Adapter<ListItemsAdapter.ViewHolder>() {
 
     private val listId = ListId
+    private lateinit var mDetector: GestureDetectorCompat
+
+    private class ItemGestureListener(
+        private val holder: ViewHolder,
+        private val openEditItemDialog: (id: String, listId: String, itemCurrentValue: String) -> Unit,
+        private val listId: String,
+        private val itemCurrentValue: String
+    ) : GestureDetector.SimpleOnGestureListener() {
+
+        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+            super.onSingleTapConfirmed(e)
+            Toast.makeText(holder.itemView.context, "Double tap to edit", Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        override fun onDoubleTap(e: MotionEvent?): Boolean {
+            super.onDoubleTap(e)
+            openEditItemDialog(holder.adapterPosition.toString(), listId, itemCurrentValue)
+            return true
+        }
+    }
+
 
     class ViewHolder(val binding: ListItemLayoutBinding, val listId: String) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListItem) {
@@ -33,6 +61,15 @@ class ListItemsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, itemPosition: Int) {
         val itemsList = listItemsViewModel.getItems()[holder.adapterPosition]
         holder.bind(itemsList)
+
+        mDetector = GestureDetectorCompat(
+            holder.itemView.context,
+            ItemGestureListener(holder, openEditItemDialog, listId, holder.binding.itemName.text.toString()
+        ))
+
+        holder.binding.listItemCard.setOnTouchListener(OnTouchListener { v, event ->
+            mDetector.onTouchEvent(event)
+        })
 
         holder.binding.checkBox.setOnClickListener {
             listItemsViewModel.checkUncheckItem(holder.adapterPosition)
@@ -57,6 +94,7 @@ class ListItemsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return ViewHolder(
             ListItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
