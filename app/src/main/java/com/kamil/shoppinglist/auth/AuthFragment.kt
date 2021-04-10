@@ -29,6 +29,11 @@ class AuthFragment : AppCompatActivity() {
             val email = binding.editTextTextEmailAddress.text.toString()
             val password = binding.editTextTextPassword.text.toString()
 
+            if (email.isEmpty() || password.isEmpty()) {
+                Log.w(TAG, "signInWithEmail:failure")
+                return@setOnClickListener
+            }
+
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
