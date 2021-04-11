@@ -16,7 +16,7 @@
     - Opprydding i databasen (Når en liste slettes blir også elementene i lista slettet)
 
   ## Test brukere
-    - joe@doe.com 123456
+    - jon@doe.com 123456
     - test@test.com 123456
 
   ## Lenker
