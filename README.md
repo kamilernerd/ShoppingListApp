@@ -20,9 +20,9 @@
     - test@test.com 123456
 
   ## Lenker
-  [Direkte lenke til APK](https://firebaseappdistribution.googleapis.com/app-binary-downloads/firebase-app-distro/app-binaries/789134172138/1:789134172138:android:16085982c786dfad799c93/13ef53d17e38f0fd0a00df8df0688563604fea829358c542ad8024a3031e9098.apk?token=AFiKKuAAAAAAYHG_mYlbcM2CceBlEHKPWtWm2nNXFnt901MJ3ZSvebjt04UnvNzlBnGH81KHv-Warc-rvvq1rAyLugGZj29-TzD-rAOZ2Irme2w_7jkFNJJYfhxXXCLZ76KmlyP_JsUArbxBR7STTIjD_ZjSMShKdXDdTdDFweJ8FVOfe6dyaqqZW5-U8Q9NJQknqAGmTOpbcNm8I9s-sqWQrSmORtm8fgyi7p422WNipR64oArV_EvEoOllz3gXeC249f83o8wI5qyQnFF-lgDKHYd4XJm3rqRRfHYuLZ-j4eZdSnKU-6TS6k29_ItHBXDmhiR-oImL3lDNL0hQzLvCjIlW07D2b0Gi-30)
+  [Direkte lenke til APK](https://firebaseappdistribution.googleapis.com/app-binary-downloads/firebase-app-distro/app-binaries/789134172138/1:789134172138:android:16085982c786dfad799c93/1361c1a0ecd502423fd06ca6c5dcdbe6654546d7c20cdfd2982f839fa6138588.apk?token=AFiKKuAAAAAAYHS-igyAJPneromdK6SHxyBaHz9_4ENgMHYKdSST8rSGQDhPZyKiZ32_F6dl2AtvELhFiiClmJ2CMxIrxA4KP08AsGVLkM2ckZDh8Y_l69yn19SdszLhe9YqxkyuIqXwVcWgyJtaNRqzTbInGPCgmkNBSAt1C16DCGDifJ-iGVVDg6WH7M8YhUwf1m9NSunQRYJbNOuldq_lWH19hQLsAmjB3s3ED1fVDHNsKGLzi-GssSlr0l7snYkCGURDZiVt1FI9qO8opBLq1GIISbHo4jIF3EH6c7tCbPoccxZlylKVrsDtsQrdTXN3Xucj2iigKmtIUalYUyUfya0EyXPD3AAyUU0)
   
-  [Invitasjon som tester](https://appdistribution.firebase.dev/i/f0a4265041894782)
+  [Invitasjon som tester](https://appdistribution.firebase.dev/i/179d7bead1bb4836)
   
   
 
