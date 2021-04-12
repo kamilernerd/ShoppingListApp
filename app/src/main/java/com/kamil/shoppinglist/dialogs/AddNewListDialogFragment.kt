@@ -20,7 +20,6 @@ class AddNewListDialogFragment(
 
     private var _binding: AddNewListDialogFragmentBinding? = null
     private val binding get() = _binding!!
-
     private var listCollectionAdapter = ListCollectionAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ProgressBar
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Tasks
@@ -17,7 +18,8 @@ import kotlinx.coroutines.CoroutineStart
 
 class AddNewItemDialogFragment(
     private var listItemsViewModel: ListItemsViewModel,
-    private val ListItemsAdapter: RecyclerView
+    private val ListItemsAdapter: RecyclerView,
+    private val progressBar: ProgressBar
 ) : DialogFragment() {
 
     private var _binding: AddNewItemDialogFragmentBinding? = null
@@ -55,6 +57,8 @@ class AddNewItemDialogFragment(
             } else {
                 listItemsViewModel.addItem(itemName.toString())
                 listItemsAdapter.adapter?.notifyDataSetChanged()
+
+                progressBar.max = progressBar.max + 1
 
                 dialog?.hide()
                 dialog?.cancel()

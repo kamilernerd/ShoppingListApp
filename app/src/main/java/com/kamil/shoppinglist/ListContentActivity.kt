@@ -47,7 +47,8 @@ class ListContentActivity : AppCompatActivity() {
         binding.addNewItem.setOnClickListener {
             AddNewItemDialogFragment(
                 listsItemsViewModel,
-                binding.listItems
+                binding.listItems,
+                binding.progressBar
             ).show(
                 supportFragmentManager, AddNewItemDialogFragment.TAG
             )
