@@ -27,6 +27,9 @@ class ListContentActivity : AppCompatActivity() {
 
         listsItemsViewModel = ListItemsViewModel(position, userId)
 
+        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar, this::openEditItemFragment)
+
+
         listsItemsViewModel.read().addOnCompleteListener {
             if (it.isComplete) {
                 binding.magicSpinner.visibility = View.GONE
@@ -35,8 +38,6 @@ class ListContentActivity : AppCompatActivity() {
                 listItemsAdapter.notifyDataSetChanged()
             }
         }
-
-        listItemsAdapter = ListItemsAdapter(listsItemsViewModel, position, binding.progressBar, this::openEditItemFragment)
 
         binding.listNameTextView.text = listName
         binding.listItems.layoutManager = LinearLayoutManager(this)
