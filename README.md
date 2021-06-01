@@ -24,6 +24,10 @@
   
   [Invitasjon som tester](https://appdistribution.firebase.dev/i/179d7bead1bb4836)
   
+ 
+![alt text](https://raw.githubusercontent.com/kamilernerd/ShoppingListApp/master/images/img1.png?token=AFY7P5HI5AEKLQL4T7G3HC3AX6V6Y)
+![alt text](https://raw.githubusercontent.com/kamilernerd/ShoppingListApp/master/images/img2.png?token=AFY7P5CUAFU7A242R7XIWLTAX6V74)
+![alt text](https://raw.githubusercontent.com/kamilernerd/ShoppingListApp/master/images/img3.png?token=AFY7P5AZ4M2JNWAUFJR3LETAX6V76)
   
 
 ![alt text](https://i.kym-cdn.com/entries/icons/mobile/000/028/021/work.jpg)
